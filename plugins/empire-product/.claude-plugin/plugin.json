@@ -1,7 +1,7 @@
 {
   "name": "empire-product",
   "version": "0.7.0",
-  "description": "Product communication and intelligence: elevator pitches (pitch), idea pressure-testing (vet), and competitor mapping (recon). Bundles three fallback subagents.",
+  "description": "Product intelligence: elevator pitches (pitch), idea pressure-testing (vet), competitor mapping (recon), deck generation (deck), and naming (mint). Bundles three fallback subagents.",
   "dependencies": ["empire-rules"],
   "author": {
     "name": "Marcos Kichel",

@@ -1,7 +1,7 @@
 {
   "name": "empire-dev",
   "version": "0.6.0",
-  "description": "Development collaboration plugin: parallel specialist code review (team-review skill) plus 11 bundled subagents covering generalist review, paradigm specialists (functional programming, concurrency, type system), and domain experts (blockchain, AI).",
+  "description": "Development collaboration: parallel specialist code review (team-review) plus pre-implementation diagnostics — cognitive audit (probe), requirements (distill), system design (shape), architecture decisions (weigh), task decomposition (slice) — and 11 bundled dev subagents.",
   "dependencies": ["empire-rules"],
   "author": {
     "name": "Marcos Kichel",
