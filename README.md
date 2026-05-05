@@ -29,7 +29,7 @@ Or hire individual departments:
 
 <!-- prettier-ignore-start -->
 > [!NOTE]
-> `/empire-rules:sync-rules` patches your global `CLAUDE.md` with opionated instructions on how to work with agents in parallel. 
+> `/empire-rules:sync-rules` patches your global `CLAUDE.md` with opionated instructions on how to work with agents in parallel.
 <!-- prettier-ignore-end -->
 
 ## Plugins
