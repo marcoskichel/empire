@@ -19,17 +19,17 @@ IMPORTANT: Output the rendered description verbatim. Do not summarize, paraphras
 
 ## Voice
 
-- Senior reviewer. Direct. Active voice. Imperative mood.
+- Senior dev writing for peers. Direct. Active voice. Imperative mood.
 - No "this PR", "this commit", "I am", "we", filler openers.
-- Explain intent, not mechanics. Cut anything visible in the diff.
+- Explain why and what users or callers experience differently. Cut anything obvious from the diff.
 - No emoji. No H1. No marketing tone. No "N/A" or "Risk: None".
 
 ## Length
 
 | Diff size | Budget                                                    |
 | --------- | --------------------------------------------------------- |
-| ≤ 100 LOC | ≤ 80 words, drop Risk/Test plan if trivial                |
-| ≤ 500 LOC | ≤ 200 words, full sections                                |
+| ≤ 100 LOC | ≤ 80 words, drop Risk and Test plan unless non-trivial    |
+| ≤ 500 LOC | ≤ 200 words, include only non-empty sections              |
 | > 500 LOC | ≤ 200 words, flag size in Risk, summarize at higher level |
 
 Skip empty sections entirely.
@@ -44,23 +44,38 @@ Render between markers. Preserve everything outside markers when updating.
 1–2 sentences. Problem or goal. Link issue if a commit references one.
 
 ## What changed
-3–6 bullets. Behavioral changes only. File paths only when non-obvious.
+3–5 bullets. Behavior changes only — what users or callers experience differently.
+Skip mechanical changes (renames, moves, test additions) unless they affect behavior.
+Pick the most important changes; don't enumerate everything.
 
 ## Risk
-Migrations, breaking API, new env vars or deps, rollback notes, perf concerns. Omit section if trivial. Prefix breaking changes with `BREAKING:`.
+Migrations, breaking API, new env vars or deps, rollback notes, perf concerns.
+Only include if there's real risk. Prefix breaking changes with `BREAKING:`.
 
 ## Test plan
-Reproducible local steps. Skip CI-covered checks (lint, typecheck, unit).
+Manual steps to verify the change locally.
+Omit for simple diffs or when the behavior is self-evident.
+Never list CI steps (lint, typecheck, unit tests, CI pipelines).
 <!-- pr-description:end -->
 ```
+
+## PR chains
+
+When the branch was cut from another feature branch (not from main/master), or when the user provides a parent PR URL, add before the opening marker:
+
+```
+Depends on: <PR URL or branch name>
+```
+
+Detect by running `git log --oneline <default-branch>..HEAD` and checking if the branch base differs from the repo default branch.
 
 ## Update mode
 
 If an existing body is provided:
 
 - Replace only content between `<!-- pr-description:start -->` and `<!-- pr-description:end -->`.
-- Preserve all content outside markers (screenshots, reviewer notes, `Fixes #N`, task lists).
-- If markers are absent: wrap new body in markers, append after author-written content (images, issue refs, custom H2s).
+- Preserve all content outside markers (screenshots, reviewer notes, `Fixes #N`, task lists, `Depends on:` lines).
+- If markers are absent: wrap new body in markers, append after author-written content.
 
 ## Special cases
 
@@ -78,3 +93,4 @@ If an existing body is provided:
 | "Fixes bug"                 | "Fix off-by-one in pagination cursor when total % limit == 0" |
 | "Updated tests"             | (omit — visible in diff)                                      |
 | "Renamed X to Y"            | (omit unless rollout-relevant)                                |
+| "Ran lint / CI / tests"     | (never include in test plan)                                  |
