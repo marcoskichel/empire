@@ -57,7 +57,8 @@ User can add, remove, or reweight dimensions before dispatch.
 - Inspect available subagents via the `Agent` tool's `subagent_type` parameter
 - Pick the available agent whose name/description best matches competitor research, market analysis, or competitive intelligence. Bundled fallback: `competitive-analyst`. Optionally include `market-researcher` for market-sizing dimensions.
 - MUST list chosen agents (`subagent_type`) per competitor + rationale BEFORE dispatch
-- MUST confirm roster with user; allow swaps
+- If confident in every pick → dispatch immediately
+- If uncertain (multiple scouts equally fit, no clear-fit agent for a competitor) → MUST confirm roster with user before dispatch; allow swaps
 
 </section>
 

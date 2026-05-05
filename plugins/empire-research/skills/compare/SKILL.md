@@ -58,7 +58,8 @@ User can add, remove, or reweight dimensions before dispatch.
   - Architectural choice → pick an architecture-review or systems-design agent
 - MUST include at least one general research-synthesis agent in the roster to anchor cross-option consistency
 - List chosen agent per option (using its actual `subagent_type` value) + one-line rationale BEFORE dispatch
-- Allow user to swap agents if desired
+- If confident in every pick → dispatch immediately
+- If uncertain about any pick → confirm roster with user before dispatch; allow swaps
 - Skip the shallow-scan phase — options are already known
 
 </section>

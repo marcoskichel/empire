@@ -42,7 +42,8 @@ description: >
 - Pick the available agent whose name/description best matches idea validation, brutal pressure-testing, or go/no-go analysis. Bundled fallback: `project-idea-validator`. If a more specialized validator exists in the environment, use it.
 - Optionally include a competitor-research agent (e.g. `competitive-analyst`) to enrich the validation with concrete competitor data. Skip if the validator agent already covers competitor research in its prompt.
 - MUST list chosen agents (`subagent_type`) and rationale BEFORE dispatch
-- MUST confirm roster with user; allow swaps
+- If confident in pick → dispatch immediately
+- If uncertain (multiple validators equally fit, no clear-fit validator, missing competitor-research coverage) → MUST confirm roster with user before dispatch; allow swaps
 
 </section>
 

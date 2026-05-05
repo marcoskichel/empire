@@ -67,8 +67,8 @@ description: >
   - Debugging need — complex logic, non-obvious control flow, subtle state mutations
   - Generalist coverage — always include at least one general code-reviewer agent to anchor the roster
 - MUST list chosen specialists with their actual `subagent_type` values + one-line rationale per pick BEFORE dispatch
-- MUST confirm roster with user; allow swaps, additions, removals
-- Dispatch only after user confirms
+- If confident in every pick (clear signal-to-agent fit, no ambiguity) → dispatch immediately; user may interrupt mid-flight
+- If uncertain about any pick (multiple candidates equally fit, no clear-fit agent for a signal, ambiguous diff scope) → MUST confirm roster with user before dispatch; allow swaps, additions, removals
 
 </section>
 

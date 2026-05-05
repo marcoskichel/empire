@@ -1,6 +1,6 @@
 {
   "name": "empire",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Meta plugin: installs the full empire suite (empire-git, empire-dev, empire-research, empire-product).",
   "author": {
     "name": "Marcos Kichel",

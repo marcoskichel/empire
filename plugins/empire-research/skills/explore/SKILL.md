@@ -86,7 +86,8 @@ description: >
 - For each signal that applies, pick the available agent whose name/description best matches; if multiple candidates fit, prefer the most specific; if none fit, use the most general research-synthesis agent available
 - MUST always include at least one general research-synthesis agent to anchor the roster
 - List chosen agent per approach (using its actual `subagent_type` value) + one-line rationale BEFORE dispatch
-- Allow user to swap agents if desired
+- If confident in every pick → dispatch immediately
+- If uncertain about any pick → confirm roster with user before dispatch; allow swaps
 
 </section>
 
