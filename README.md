@@ -29,7 +29,7 @@ Or hire individual departments:
 
 <!-- prettier-ignore-start -->
 > [!NOTE]
-> **Optional but recommended.** Run `/empire-rules:sync-rules` after installing to wire the skill routing rules into your `AGENTS.md` or `~/.claude/CLAUDE.md`. Claude routes more reliably with them.
+> `/empire-rules:sync-rules` patches your global `CLAUDE.md` with opionated instructions on how to work with agents in parallel. 
 <!-- prettier-ignore-end -->
 
 ## Plugins
