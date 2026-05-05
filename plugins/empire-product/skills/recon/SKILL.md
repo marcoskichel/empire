@@ -17,6 +17,7 @@ description: >
 - Map the competitive landscape across the dimensions that matter for a positioning or product decision
 - Different from `/empire-research:compare` — `compare` evaluates options for a known purpose; `recon` scouts competitors for positioning intelligence
 - Different from `/empire-product:vet` — `vet` pressure-tests an idea with go/no-go output; `recon` produces a structured matrix of competitor data without picking a winner
+- MAY be invoked automatically by `/empire-product:vet` when competitors are provided; its matrix pre-populates `vet`'s Competitor Teardown section
 
 </section>
 

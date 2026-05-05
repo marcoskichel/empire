@@ -29,7 +29,8 @@ description: >
   - Why now (market timing, unlock, trigger)
   - Assumed differentiator / unfair advantage
   - Monetization model (if relevant)
-- If any input missing → ask one clarifying question at a time
+- Optional input: competitor list (2–6 names); if provided, `/empire-product:recon` runs before validator dispatch and its matrix pre-populates the Competitor Teardown section
+- If any required input missing → ask one clarifying question at a time
 - MUST state the inferred pitch back to user before any dispatch
 - MUST get user confirmation on pitch and assumptions
 - MUST NOT proceed without confirmed pitch
@@ -40,10 +41,12 @@ description: >
 
 - Inspect available subagents via the `Agent` tool's `subagent_type` parameter
 - Pick the available agent whose name/description best matches idea validation, brutal pressure-testing, or go/no-go analysis. Bundled fallback: `project-idea-validator`. If a more specialized validator exists in the environment, use it.
-- Optionally include a competitor-research agent (e.g. `competitive-analyst`) to enrich the validation with concrete competitor data. Skip if the validator agent already covers competitor research in its prompt.
+- Competitor research — choose one path, never both:
+  - Competitors provided → invoke `/empire-product:recon` now; wait for matrix output; it will pre-populate the Competitor Teardown section; do NOT ask the validator to research competitors
+  - No competitors provided → include `competitive-analyst` subagent (or equivalent) alongside validator; it handles ad-hoc competitor discovery during validation
 - MUST list chosen agents (`subagent_type`) and rationale BEFORE dispatch
 - If confident in pick → dispatch immediately
-- If uncertain (multiple validators equally fit, no clear-fit validator, missing competitor-research coverage) → MUST confirm roster with user before dispatch; allow swaps
+- If uncertain (multiple validators equally fit, no clear-fit validator) → MUST confirm roster with user before dispatch; allow swaps
 
 </section>
 
@@ -66,6 +69,8 @@ description: >
   <quantitative evidence: search volume, community size, competitor traction, willingness-to-pay indicators>
 
   ## Competitor Teardown
+
+  <pre-populated from `/empire-product:recon` matrix when competitors were provided; otherwise researched by validator agent>
 
   | Competitor | Positioning | Strengths | Weaknesses | Threat Level |
   |---|---|---|---|---|

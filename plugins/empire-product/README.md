@@ -36,7 +36,7 @@ flowchart LR
 
 ### `vet`
 
-Pressure-test a product idea with brutal honesty. Default stance is skeptical: assume a fatal flaw until evidence proves otherwise. The skill confirms the pitch and assumptions, dispatches a validator agent (with optional competitor research) under web-search preconditions, and produces a structured report with demand signals, competitor teardown, fatal flaws, risks, and a `PROCEED / PIVOT / KILL / INSUFFICIENT_DATA` recommendation. Confidence-tagged.
+Pressure-test a product idea with brutal honesty. Default stance is skeptical: assume a fatal flaw until evidence proves otherwise. The skill confirms the pitch and assumptions, automatically invokes `/empire-product:recon` when competitors are provided (feeding its matrix directly into the Competitor Teardown section), then dispatches a validator agent under web-search preconditions. Produces a structured report with demand signals, competitor teardown, fatal flaws, risks, and a `PROCEED / PIVOT / KILL / INSUFFICIENT_DATA` recommendation. Confidence-tagged.
 
 **Triggers:** "vet idea", "validate idea", "go no go", "pressure test", "is this idea good", "kill the idea", "should I build this", "fatal flaw check", "stress test the idea", "brutal honesty on this idea".
 
