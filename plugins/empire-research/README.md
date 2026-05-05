@@ -1,6 +1,6 @@
 # empire-research
 
-Research collaboration: open-ended exploration plus closed comparison, with consolidated reports. Two skills, one bundled subagent.
+Research collaboration: open-ended exploration, closed comparison, claim verification, and hallucination checking — with parallel agent dispatch and consolidated reports. Four skills, one bundled subagent.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -48,6 +48,22 @@ flowchart LR
 ```
 
 **Source:** [`skills/compare/SKILL.md`](skills/compare/SKILL.md)
+
+### `verify`
+
+Run a systematic verification pass on generated content to catch hallucinations, confabulations, and unsupported assertions. Extracts all verifiable claims, categorizes by verifiability, checks each against external sources, and assigns overall confidence. MUST be a separate pass from generation — cannot reliably check its own output in the same pass. Findings stay local.
+
+**Triggers:** "fact-check this", "verify these claims", "check for hallucinations", "second pass on accuracy", "is this accurate", "verify the output", "/empire-research:verify".
+
+**Source:** [`skills/verify/SKILL.md`](skills/verify/SKILL.md)
+
+### `dissect`
+
+Systematically investigate complex claims by decomposing them into atomic verifiable components, resolving vague entities, verifying each independently, and separating confirmed facts from narrative interpretation. Use for multi-part assertions or narratives that mix facts with framing. Confidence-tagged. Findings stay local.
+
+**Triggers:** "investigate this claim", "fact-check this", "is this true", "decompose this narrative", "viral content check", "trace this claim", "/empire-research:dissect".
+
+**Source:** [`skills/dissect/SKILL.md`](skills/dissect/SKILL.md)
 
 ## Bundled agents
 

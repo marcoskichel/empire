@@ -1,6 +1,6 @@
 # empire-product
 
-Product communication and intelligence: pitches, idea validation, and competitor mapping. Three skills, three bundled subagents.
+Product communication and intelligence: pitches, idea validation, competitor mapping, and naming. Four skills, three bundled subagents.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -63,6 +63,22 @@ flowchart LR
 ```
 
 **Source:** [`skills/recon/SKILL.md`](skills/recon/SKILL.md)
+
+### `mint`
+
+Diagnose why names don't work and guide creation of names that do. Covers five failure states (feels wrong, disjointed family, forgettable, wrong signals, practical failures) and four alignment layers (sound, meaning, cultural, functional). Works for brand names, product names, skill names, character names, place names, and titles. Sequential phased process for brand/product; diagnostic states for quick naming. Findings stay local.
+
+**Triggers:** "name this", "this name doesn't feel right", "brand naming", "product naming", "names don't match", "forgettable name", "wrong associations", "mint a name", "/empire-product:mint".
+
+```mermaid
+flowchart LR
+  problem[Naming problem] --> state[Identify state]
+  state --> layers[Analyze layers]
+  layers --> conflicts[Find conflicts]
+  conflicts --> fix[Interventions]
+```
+
+**Source:** [`skills/mint/SKILL.md`](skills/mint/SKILL.md)
 
 ## Bundled agents
 

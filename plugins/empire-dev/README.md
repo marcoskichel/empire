@@ -1,6 +1,6 @@
 # empire-dev
 
-Development collaboration: parallel specialist code review plus a bundled roster of dev subagents covering generalist review, paradigm specialists, and domain experts.
+Development collaboration: parallel specialist code review, pre-implementation diagnostics (requirements, design, architecture, task breakdown, cognitive audit), plus a bundled roster of dev subagents.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -35,6 +35,46 @@ flowchart LR
 ```
 
 **Source:** [`skills/team-review/SKILL.md`](skills/team-review/SKILL.md)
+
+### `probe`
+
+Diagnose thinking failures and audit whether reasoning serves inquiry or defense. Two modes: self-monitoring (agent audits own reasoning) and user coaching (diagnose thinking pattern with questions, not declarations). Covers eight failure states from no orientation awareness through Monitor co-option — where the self-corrective machinery actively defends wrong conclusions. Findings stay local.
+
+**Triggers:** "check my thinking", "am I reasoning well", "why am I stuck", "reasoning feels circular", "probe my logic", "conclusion feels defended", "/empire-dev:probe".
+
+**Source:** [`skills/probe/SKILL.md`](skills/probe/SKILL.md)
+
+### `weigh`
+
+Systematically evaluate architecture decisions, document trade-offs, and select appropriate patterns for context. Generates weighted decision matrices, ADRs, and applies refactoring patterns (Branch by Abstraction, Strangler Fig, Parallel Run). Findings stay local.
+
+**Triggers:** "architecture decision", "ADR", "which pattern should I use", "evaluate trade-offs", "technology choice", "design pattern selection", "weigh the options", "/empire-dev:weigh".
+
+**Source:** [`skills/weigh/SKILL.md`](skills/weigh/SKILL.md)
+
+### `shape`
+
+Diagnose system design problems across seven states — from no requirements clarity through validated design with walking skeleton defined. Prevents over-engineering and under-engineering; surfaces missing integration points; drives toward a thin end-to-end path before full build-out. Findings stay local.
+
+**Triggers:** "system design", "how should I structure this", "too much abstraction", "under-engineered", "where do I start building", "design this system", "walking skeleton", "/empire-dev:shape".
+
+**Source:** [`skills/shape/SKILL.md`](skills/shape/SKILL.md)
+
+### `distill`
+
+Diagnose requirements problems across six states — from no problem statement through validated requirements ready for design. Distinguishes problem from solution, surfaces hidden constraints, and bounds scope to a viable V1. Pairs with `shape` as the upstream handoff. Findings stay local.
+
+**Triggers:** "requirements analysis", "what should I build", "clarify requirements", "is this the right problem", "define scope", "distill requirements", "/empire-dev:distill".
+
+**Source:** [`skills/distill/SKILL.md`](skills/distill/SKILL.md)
+
+### `slice`
+
+Transform overwhelming development tasks into manageable, independently deliverable units. Diagnoses six failure states (too big, no entry point, dependency tangles, no done criteria, scope creep, spike needed) and applies decomposition patterns: vertical slicing, walking skeleton, tracer bullet. Includes Fibonacci sizing and three-point estimation.
+
+**Triggers:** "task too big", "can't estimate", "overwhelmed by scope", "where do I start", "break this down", "epic needs breakdown", "slice this up", "/empire-dev:slice".
+
+**Source:** [`skills/slice/SKILL.md`](skills/slice/SKILL.md)
 
 ## Bundled agents
 

@@ -1,6 +1,6 @@
 {
   "name": "empire-dev",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Development collaboration plugin: parallel specialist code review (team-review skill) plus 11 bundled subagents covering generalist review, paradigm specialists (functional programming, concurrency, type system), and domain experts (blockchain, AI).",
   "dependencies": ["empire-rules"],
   "author": {
