@@ -108,4 +108,5 @@ The `team-review` skill auto-discovers whatever specialist subagents are install
 
 ## Upstream attribution
 
-Modifications and source: [`agents/NOTICE.md`](agents/NOTICE.md).
+- Bundled agents: [`agents/NOTICE.md`](agents/NOTICE.md)
+- Bundled skills: [`skills/NOTICE.md`](skills/NOTICE.md)

@@ -92,4 +92,5 @@ All three skills auto-discover whatever specialist subagents are installed. If y
 
 ## Upstream attribution
 
-Source and license: [`agents/NOTICE.md`](agents/NOTICE.md).
+- Bundled agents: [`agents/NOTICE.md`](agents/NOTICE.md)
+- Bundled skills: [`skills/NOTICE.md`](skills/NOTICE.md)

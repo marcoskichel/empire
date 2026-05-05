@@ -18,17 +18,17 @@
     {
       "name": "empire-dev",
       "source": "./plugins/empire-dev",
-      "description": "Development collaboration: parallel specialist code review (team-review skill) plus 11 bundled dev subagents (code review, paradigms, domain experts)."
+      "description": "Development collaboration: parallel specialist code review (team-review) plus pre-implementation diagnostics (probe, distill, shape, weigh, slice) and 11 bundled dev subagents."
     },
     {
       "name": "empire-research",
       "source": "./plugins/empire-research",
-      "description": "Research collaboration: parallel approach exploration (research skill) plus three bundled research subagents (synthesis, comparative, idea validation)."
+      "description": "Research collaboration: open-ended exploration (explore), closed comparison (compare), hallucination checking (verify), and claim investigation (dissect) plus a bundled research subagent."
     },
     {
       "name": "empire-product",
       "source": "./plugins/empire-product",
-      "description": "Product communication: pitches, positioning, and (future) competitive analysis and docs."
+      "description": "Product intelligence: pitches (pitch), idea pressure-testing (vet), competitor mapping (recon), deck generation (deck), and naming (mint) plus three bundled subagents."
     },
     {
       "name": "empire-rules",
