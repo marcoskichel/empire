@@ -2,7 +2,7 @@
 
 Skills installed under the `empire-dev` Claude Code plugin.
 
-- For non-trivial diffs or PRs, prefer `/empire-dev:team-review` over single-pass review even if the user did not say "team review" — the parallel specialist pass catches issues a single pass misses
+- `/empire-dev:team-review` is opt-in; dispatch only when user uses a Strong trigger phrase or explicitly confirms after a Weak phrase — never auto-escalate based on diff size
 - For follow-up review passes after addressing comments, the same roster is reused — say "re-review" or "another pass" to re-dispatch
 - When a bundled or general-purpose subagent is better-qualified for a question than the main thread, MUST delegate — pick by fit, not by question size
 - When independent subtasks exist, SHOULD dispatch specialist subagents in parallel; if isolation requirements are unclear, MUST ask whether subagents share one worktree or each get their own before dispatching

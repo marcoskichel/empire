@@ -17,7 +17,7 @@ description: >
 - If user used a Strong phrase → proceed without confirmation
 - If user used only a Weak phrase → MUST confirm before dispatch:
   - "Run a parallel team review (3–6 specialists), or a single-pass review?"
-  - Default to single-pass on ambiguity; dispatch a team review only when user explicitly opts in or repo CLAUDE.md mandates it for non-trivial diffs
+  - Default to single-pass on ambiguity; dispatch a team review only when user explicitly opts in
 - MUST NOT silently dispatch a multi-agent review on weak phrasing alone
 
 </section>
@@ -81,6 +81,9 @@ description: >
   - User's stated intent (if provided)
   - Output format instruction (see below)
   - "Do NOT post to GitHub. Report findings in chat only."
+  - "Scope: review what the diff DOES; flag defects in changed lines + their direct blast radius."
+  - "Propose new abstractions, tests, or docs ONLY when the diff has a concrete defect best fixed that way; speculative 'would be cleaner' suggestions → demote to Nits or omit."
+  - "Net-new additions (file, abstraction, test, doc) MUST cite the specific defect in the diff they resolve; no defect cited → drop the finding."
 - Required specialist output format:
 
   ```
@@ -151,7 +154,7 @@ description: >
   <file:line-range> [`<category>`] — <merged suggestion>  ×K  [<specialist-A>, <specialist-B>]
   ...
 
-  ## Single-source  (1 specialist)
+  ## Single-source  (1 specialist — low confidence, treat as optional)
   ### Must-fix
   <file:line-range> [`<category>`] — <suggestion>  [<specialist>]
   ...
@@ -166,7 +169,7 @@ description: >
 
 - Omit any tier or severity heading that has no entries
 - Prioritize Recommended actions: Consensus before Corroborated before Single-source; within each tier, Must-fix before Should-fix before Nits
-- MUST NOT silently drop Single-source findings — vote tier signals confidence, user retains full picture
+- Single-source findings MUST carry the `low-confidence` tag and MUST be excluded from Recommended actions unless the lone specialist is the domain owner for that category (e.g. only security-auditor flagged a security finding); user may still promote them manually
 - Rationale: per-finding majority vote outperforms iterative debate at lower cost ("Debate or Vote", arxiv:2508.17536, NeurIPS 2025); tiering preserves recall without sacrificing precision
 
 </section>
