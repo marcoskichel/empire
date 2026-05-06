@@ -21,7 +21,7 @@ Or install the full empire bundle (which includes this plugin):
 
 ### `team-review`
 
-Spawn parallel specialist subagents to review a diff or PR, then consolidate findings into a single deduplicated report. The skill detects signals in the diff (language, security surface, architectural change, perf hotspots, tests), picks 3–6 specialists from the available roster, dispatches them in parallel, and merges their findings into a prioritized must-fix / should-fix / nits list. Findings stay local — never posted to GitHub.
+Spawn parallel specialist subagents to review a diff or PR, then aggregate findings into a tiered consensus report (Consensus / Corroborated / Single-source). The skill detects signals in the diff (language, security surface, architectural change, perf hotspots, tests), picks 3–6 specialists from the available roster, dispatches them in parallel, then votes findings by `(file, line-range, category)` match — surfacing high-confidence issues first while preserving every specialist's input. Findings stay local — never posted to GitHub.
 
 **Triggers (strong, dispatch immediately):** "team review", "specialist review", "have specialists review", "ask the team", "parallel review", "have the team look", "re-review", "another pass".
 
@@ -31,7 +31,8 @@ Spawn parallel specialist subagents to review a diff or PR, then consolidate fin
 flowchart LR
   diff[Diff] --> roster[Pick specialists]
   roster --> dispatch[Parallel review]
-  dispatch --> report[Consolidated report]
+  dispatch --> vote[Vote + tier]
+  vote --> report[Tiered report]
 ```
 
 **Source:** [`skills/team-review/SKILL.md`](skills/team-review/SKILL.md)
