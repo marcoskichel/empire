@@ -6,7 +6,7 @@ description: >
   discovered, confidence is high but evidence is thin, analysis grows more elaborate
   without becoming more accurate, or same approach keeps failing.
   Trigger phrases: "check my thinking", "am I reasoning well", "why am I stuck",
-  "reasoning feels circular", "probe my logic", "/empire-dev:probe".
+  "reasoning feels circular", "probe my logic", "/empire-product:probe".
   Two modes: self-monitoring (agent audits own process) and user coaching (diagnose
   user's thinking pattern with questions, not declarations).
 ---

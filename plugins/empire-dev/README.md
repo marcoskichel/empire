@@ -1,6 +1,6 @@
 # empire-dev
 
-Development collaboration: parallel specialist code review, pre-implementation diagnostics (requirements, design, architecture, task breakdown, cognitive audit), plus a bundled roster of dev subagents.
+Development collaboration: parallel specialist code review, pre-implementation diagnostics (design, architecture, task breakdown), plus a bundled roster of dev subagents.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -36,14 +36,6 @@ flowchart LR
 
 **Source:** [`skills/team-review/SKILL.md`](skills/team-review/SKILL.md)
 
-### `probe`
-
-Diagnose thinking failures and audit whether reasoning serves inquiry or defense. Two modes: self-monitoring (agent audits own reasoning) and user coaching (diagnose thinking pattern with questions, not declarations). Covers eight failure states from no orientation awareness through Monitor co-option — where the self-corrective machinery actively defends wrong conclusions. Findings stay local.
-
-**Triggers:** "check my thinking", "am I reasoning well", "why am I stuck", "reasoning feels circular", "probe my logic", "conclusion feels defended", "/empire-dev:probe".
-
-**Source:** [`skills/probe/SKILL.md`](skills/probe/SKILL.md)
-
 ### `weigh`
 
 Systematically evaluate architecture decisions, document trade-offs, and select appropriate patterns for context. Generates weighted decision matrices, ADRs, and applies refactoring patterns (Branch by Abstraction, Strangler Fig, Parallel Run). Findings stay local.
@@ -59,14 +51,6 @@ Diagnose system design problems across seven states — from no requirements cla
 **Triggers:** "system design", "how should I structure this", "too much abstraction", "under-engineered", "where do I start building", "design this system", "walking skeleton", "/empire-dev:shape".
 
 **Source:** [`skills/shape/SKILL.md`](skills/shape/SKILL.md)
-
-### `distill`
-
-Diagnose requirements problems across six states — from no problem statement through validated requirements ready for design. Distinguishes problem from solution, surfaces hidden constraints, and bounds scope to a viable V1. Pairs with `shape` as the upstream handoff. Findings stay local.
-
-**Triggers:** "requirements analysis", "what should I build", "clarify requirements", "is this the right problem", "define scope", "distill requirements", "/empire-dev:distill".
-
-**Source:** [`skills/distill/SKILL.md`](skills/distill/SKILL.md)
 
 ### `slice`
 

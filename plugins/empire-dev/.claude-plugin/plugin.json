@@ -1,6 +1,6 @@
 {
   "name": "empire-dev",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Development collaboration: parallel specialist code review (team-review) plus pre-implementation diagnostics — cognitive audit (probe), requirements (distill), system design (shape), architecture decisions (weigh), task decomposition (slice) — and 11 bundled dev subagents.",
   "dependencies": ["empire-rules"],
   "author": {

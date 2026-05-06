@@ -11,6 +11,8 @@ diagnostic content and intent are preserved.
 ### From [jwynia/agent-skills](https://github.com/jwynia/agent-skills) — MIT, © Jerry Wynia
 
 - `mint/SKILL.md` — adapted from `skills/general/ideation/naming/SKILL.md`. Renamed `naming` → `mint`.
+- `distill/SKILL.md` — adapted from `skills/tech/development/architecture/requirements-analysis/SKILL.md`. Renamed `requirements-analysis` → `distill`.
+- `probe/SKILL.md` — adapted from `skills/general/meta/good-thinking/SKILL.md`. Renamed `good-thinking` → `probe`.
 
 ## Greenfield (no upstream)
 

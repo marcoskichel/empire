@@ -10,10 +10,8 @@ diagnostic content and intent are preserved.
 
 ### From [jwynia/agent-skills](https://github.com/jwynia/agent-skills) — MIT, © Jerry Wynia
 
-- `probe/SKILL.md` — adapted from `skills/general/meta/good-thinking/SKILL.md`. Renamed `good-thinking` → `probe`.
 - `weigh/SKILL.md` — adapted from `skills/tech/development/architecture/architecture-decision/SKILL.md`. Renamed `architecture-decision` → `weigh`.
 - `shape/SKILL.md` — adapted from `skills/tech/development/architecture/system-design/SKILL.md`. Renamed `system-design` → `shape`.
-- `distill/SKILL.md` — adapted from `skills/tech/development/architecture/requirements-analysis/SKILL.md`. Renamed `requirements-analysis` → `distill`.
 - `slice/SKILL.md` — adapted from `skills/tech/development/quality/task-decomposition/SKILL.md`. Renamed `task-decomposition` → `slice`.
 
 ## Greenfield (no upstream)
