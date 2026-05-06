@@ -6,7 +6,7 @@ description: >
   constraints, and bound scope to a viable V1.
   Trigger phrases: "requirements analysis", "what should I build", "clarify requirements",
   "is this the right problem", "define scope", "what does the user need",
-  "distill requirements", "/empire-dev:distill".
+  "distill requirements", "/empire-product:distill".
   Findings stay local — never post to GitHub.
 ---
 

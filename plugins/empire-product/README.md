@@ -1,6 +1,6 @@
 # empire-product
 
-Product communication and intelligence: pitches, idea validation, competitor mapping, and naming. Four skills, three bundled subagents.
+Product communication and intelligence: pitches, idea validation, competitor mapping, naming, requirements distillation, and thinking diagnostics. Six skills, three bundled subagents.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -79,6 +79,22 @@ flowchart LR
 ```
 
 **Source:** [`skills/mint/SKILL.md`](skills/mint/SKILL.md)
+
+### `distill`
+
+Diagnose requirements problems across six states — from no problem statement through validated requirements ready for design. Distinguishes problem from solution, surfaces hidden constraints, and bounds scope to a viable V1. Pairs with `/empire-dev:shape` as the upstream handoff. Findings stay local.
+
+**Triggers:** "requirements analysis", "what should I build", "clarify requirements", "is this the right problem", "define scope", "distill requirements", "/empire-product:distill".
+
+**Source:** [`skills/distill/SKILL.md`](skills/distill/SKILL.md)
+
+### `probe`
+
+Diagnose thinking failures and audit whether reasoning serves inquiry or defense. Two modes: self-monitoring (agent audits own reasoning) and user coaching (diagnose thinking pattern with questions, not declarations). Covers eight failure states from no orientation awareness through Monitor co-option — where the self-corrective machinery actively defends wrong conclusions. Findings stay local.
+
+**Triggers:** "check my thinking", "am I reasoning well", "why am I stuck", "reasoning feels circular", "probe my logic", "conclusion feels defended", "/empire-product:probe".
+
+**Source:** [`skills/probe/SKILL.md`](skills/probe/SKILL.md)
 
 ## Bundled agents
 

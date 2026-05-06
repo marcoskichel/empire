@@ -14,9 +14,9 @@ This file provides guidance for AI agents working with code in this repository.
 - `.claude-plugin/marketplace.json` — marketplace manifest. Each `plugins[]` entry points to one of the `plugins/empire-*` dirs.
 - `plugins/empire-meta/.claude-plugin/plugin.json` — meta plugin (`name: "empire"`). Empty skills dir. Uses `dependencies` field to auto-install the sub-plugins.
 - `plugins/empire-git/` — git workflow skills (`worktree-*`, `pr-description`) + `scripts/worktree-setup.sh`.
-- `plugins/empire-dev/` — code `team-review` skill plus 11 bundled dev subagents (code review, paradigms, domain experts).
+- `plugins/empire-dev/` — code `team-review` skill, pre-implementation engineering skills (`shape`, `weigh`, `slice`), plus 11 bundled dev subagents (code review, paradigms, domain experts).
 - `plugins/empire-research/` — `explore` (open-ended) and `compare` (closed) research skills, with `research-analyst` as bundled fallback subagent.
-- `plugins/empire-product/` — `pitch`, `vet` (idea pressure-test), and `recon` (competitor matrix) skills, plus three bundled subagents (`project-idea-validator`, `competitive-analyst`, `market-researcher`).
+- `plugins/empire-product/` — product skills (`pitch`, `vet`, `recon`, `mint`, `distill`, `probe`), plus three bundled subagents (`project-idea-validator`, `competitive-analyst`, `market-researcher`).
 - `plugins/empire-*/skills/<skill-name>/SKILL.md` — one dir per skill. Skill name in frontmatter MUST match dir name.
 - `plugins/empire-*/README.md` — one per plugin. Plugin-specific docs (skills list, triggers, source links). Root `README.md` is the project intro and links to these.
 - `docs/superpowers/{specs,plans}/` — gitignored. Local-only design notes. Never commit.
