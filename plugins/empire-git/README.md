@@ -142,4 +142,4 @@ To make it impossible for the agent to bypass, add this one-line rule to your pr
 
 ## Upstream attribution
 
-Worktree skills ported from [`@thinkvelta/claude-worktree-tools`](https://github.com/ThinkVelta/claude-worktree-tools) (MIT).
+Source and license: [`skills/NOTICE.md`](skills/NOTICE.md).
