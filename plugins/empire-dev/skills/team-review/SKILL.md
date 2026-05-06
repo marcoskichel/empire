@@ -85,18 +85,21 @@ description: >
 
   ```
   ## Must-fix
-  <file:line> — <concrete suggestion>
+  <file:line-range> [`<category>`] — <concrete suggestion>
 
   ## Should-fix
-  <file:line> — <concrete suggestion>
+  <file:line-range> [`<category>`] — <concrete suggestion>
 
   ## Nits
-  <file:line> — <concrete suggestion>
+  <file:line-range> [`<category>`] — <concrete suggestion>
 
   ## Praise
   <what was done well>
   ```
 
+- `<file:line-range>` = exact line or hyphen range (e.g. `src/auth.ts:42` or `src/auth.ts:42-58`)
+- `<category>` MUST be exactly one of: `correctness`, `security`, `performance`, `architecture`, `tests`, `style`, `docs`
+- One finding per line; no prose paragraphs between findings
 - Cap each specialist response under 400 words
 
 </section>
@@ -123,10 +126,48 @@ description: >
   | Specialist | Must-fix | Should-fix | Nits |
   |---|---|---|---|
   ```
-- Deduplicated `## Must-fix` — merged across specialists, file:line, concrete fix
-- Deduplicated `## Should-fix`
-- `## Conflicts` — where specialists disagree; state each side
-- `## Recommended actions` — prioritized list; include rationale per item
+- Aggregate findings by tier — vote across specialists on `(file, line-range, category)` match key
+- Two findings match when: same file path AND overlapping line-range (within ±5 lines) AND identical category
+- Merge matched findings into one entry; preserve clearest suggestion wording; tally specialist count
+- Tiers (let `M` = roster size):
+  - `Consensus` — flagged by strict majority (> M/2)
+  - `Corroborated` — flagged by ≥ 2 specialists, below majority
+  - `Single-source` — flagged by exactly 1 specialist
+- Required report structure:
+
+  ```
+  ## Consensus  (> M/2 specialists agree)
+  ### Must-fix
+  <file:line-range> [`<category>`] — <merged suggestion>  ×N/M
+
+  ### Should-fix
+  ...
+
+  ### Nits
+  ...
+
+  ## Corroborated  (≥ 2 specialists)
+  ### Must-fix
+  <file:line-range> [`<category>`] — <merged suggestion>  ×K  [<specialist-A>, <specialist-B>]
+  ...
+
+  ## Single-source  (1 specialist)
+  ### Must-fix
+  <file:line-range> [`<category>`] — <suggestion>  [<specialist>]
+  ...
+
+  ## Conflicts
+  <file:line-range> — <specialist-A says X> vs <specialist-B says Y>
+
+  ## Recommended actions
+  1. <action> — <rationale referencing tier + severity>
+  ...
+  ```
+
+- Omit any tier or severity heading that has no entries
+- Prioritize Recommended actions: Consensus before Corroborated before Single-source; within each tier, Must-fix before Should-fix before Nits
+- MUST NOT silently drop Single-source findings — vote tier signals confidence, user retains full picture
+- Rationale: per-finding majority vote outperforms iterative debate at lower cost ("Debate or Vote", arxiv:2508.17536, NeurIPS 2025); tiering preserves recall without sacrificing precision
 
 </section>
 
