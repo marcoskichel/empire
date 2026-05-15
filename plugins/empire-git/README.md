@@ -121,7 +121,7 @@ flowchart LR
 
 ### `pr-description`
 
-Canonical PR description template. Senior-dev voice, ≤200 words. Sections: Why, What changed (behavior only, most important only), Risk (optional — omit when trivial), Test plan (omit for simple/hard-to-test diffs; never CI steps). Adds `Depends on: <PR URL>` for PR chains. Idempotent `<!-- pr-description:start/end -->` markers so user-added content (screenshots, `Fixes #N`, task lists) survives updates. Output goes to stdout for the caller to pipe into `gh pr create --body-file -` or `gh pr edit --body-file -`.
+Canonical PR description template. Senior-dev voice, ≤200 words. Sections: Why, What changed (behavior only, most important only), Risk (optional — omit when trivial), Test plan (omit for simple/hard-to-test diffs; never CI steps). Adds `Depends on: <PR URL>` for PR chains. Idempotent `<!-- pr-description:start/end -->` markers so user-added content (screenshots, `Fixes #N`, task lists) survives updates. Uses `CONTEXT.md` vocabulary for domain terms if present. Output goes to stdout for the caller to pipe into `gh pr create --body-file -` or `gh pr edit --body-file -`.
 
 **Triggers:** "PR description", "PR body", "pull request description", "PR summary", "PR template", "GitHub PR body", "draft a PR", "write the PR", "summarize this branch for review", "regenerate PR body".
 

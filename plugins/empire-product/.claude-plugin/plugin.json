@@ -1,6 +1,6 @@
 {
   "name": "empire-product",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Product intelligence: elevator pitches (pitch), idea pressure-testing (vet), competitor mapping (recon), deck generation (deck), and naming (mint). Bundles three fallback subagents.",
   "dependencies": ["empire-rules"],
   "author": {

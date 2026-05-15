@@ -31,6 +31,13 @@ Two types must work together:
 
 </section>
 
+<section id="domain-awareness">
+
+SHOULD read `CONTEXT.md` at repo root if present — use its vocabulary verbatim; imprecise terminology can mask reasoning failures.
+If `CONTEXT.md` does not exist, proceed without it. Do not create it unprompted.
+
+</section>
+
 <section id="operations">
 
 Seven operations in complementary pairs. Skill = oscillation between poles, not picking one.

@@ -23,6 +23,7 @@ IMPORTANT: Output the rendered description verbatim. Do not summarize, paraphras
 - No "this PR", "this commit", "I am", "we", filler openers.
 - Explain why and what users or callers experience differently. Cut anything obvious from the diff.
 - No emoji. No H1. No marketing tone. No "N/A" or "Risk: None".
+- If `CONTEXT.md` exists in the repo, use its vocabulary for domain terms.
 
 ## Length
 

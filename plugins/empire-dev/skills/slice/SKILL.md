@@ -33,6 +33,14 @@ description: >
 
 </section>
 
+<section id="domain-awareness">
+
+SHOULD read `CONTEXT.md` at repo root before proceeding — use its vocabulary verbatim; never substitute synonyms.
+SHOULD scan `docs/adr/` for decisions in the area under analysis — respect accepted ADRs; do not re-litigate closed decisions.
+If neither exists, proceed without them. Do not create these files unprompted.
+
+</section>
+
 <section id="diagnostic-states">
 
 ### TD1: Too Big to Understand
