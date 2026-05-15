@@ -27,6 +27,14 @@ Balance strategies: start simple; add complexity as needed; measure before optim
 
 </section>
 
+<section id="domain-awareness">
+
+SHOULD read `CONTEXT.md` at repo root before proceeding — use its vocabulary verbatim; never substitute synonyms.
+SHOULD scan `docs/adr/` for decisions in the area under analysis — respect accepted ADRs; do not re-litigate closed decisions.
+If neither exists, proceed without them. Do not create these files unprompted.
+
+</section>
+
 <section id="context-mapping">
 
 MUST consider team and scale context before recommending patterns.
@@ -72,12 +80,24 @@ MUST list criteria and weights before scoring. MUST justify weights against stat
 
 Use ADR for any decision that would be expensive to reverse.
 
+Write to `docs/adr/NNNN-<slug>.md` — NNNN = next available number zero-padded to 4 digits; slug = lowercase-hyphenated title. Create `docs/adr/` if absent.
+
 ```markdown
-# ADR-[NUMBER]: [TITLE]
+---
+adr: NNNN
+title: <title>
+date: YYYY-MM-DD
+status: proposed
+supersedes: null
+tags: []
+modules: []
+---
+
+# ADR-NNNN: <TITLE>
 
 ## Status
 
-[Proposed | Accepted | Deprecated | Superseded]
+[Proposed | Accepted | Deprecated | Superseded by ADR-MMMM]
 
 ## Context
 
@@ -115,6 +135,8 @@ Use ADR for any decision that would be expensive to reverse.
 
 Reason rejected: [Why]
 ```
+
+Update frontmatter `status` when the decision changes state. To supersede: set `status: superseded-by ADR-MMMM` in the old ADR; reference the old one in the new ADR's `supersedes` field.
 
 </section>
 

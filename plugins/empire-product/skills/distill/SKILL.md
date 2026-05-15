@@ -18,6 +18,14 @@ MUST NOT discuss architecture or implementation until requirements are validated
 
 </section>
 
+<section id="domain-awareness">
+
+SHOULD read `CONTEXT.md` at repo root before proceeding — use its vocabulary verbatim; never substitute synonyms.
+SHOULD scan `docs/adr/` for decisions in the area under analysis — respect accepted ADRs; do not re-litigate closed decisions.
+If neither exists, proceed without them. Do not create these files unprompted.
+
+</section>
+
 <section id="states">
 
 ### RA0: No Problem Statement
@@ -80,12 +88,13 @@ MUST NOT discuss architecture or implementation until requirements are validated
 
 <section id="diagnostic-process">
 
-1. Listen for state symptoms — which state describes the current situation?
-2. Start at the earliest problem state — MUST NOT skip ahead (if RA0 symptoms exist, don't jump to RA2)
-3. Ask key questions for that state
-4. Apply interventions — work through exercises
-5. Validate before moving on — check indicators before progressing
-6. Produce artifacts — Problem Statement, Need Hierarchy, Constraint Inventory, Scope Definition
+1. Read `CONTEXT.md` and relevant ADRs in `docs/adr/` if present — use domain vocabulary throughout
+2. Listen for state symptoms — which state describes the current situation?
+3. Start at the earliest problem state — MUST NOT skip ahead (if RA0 symptoms exist, don't jump to RA2)
+4. Ask key questions for that state
+5. Apply interventions — work through exercises
+6. Validate before moving on — check indicators before progressing
+7. Produce artifacts — Problem Statement, Need Hierarchy, Constraint Inventory, Scope Definition
 
 </section>
 

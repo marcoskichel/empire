@@ -20,6 +20,14 @@ MUST NOT proceed with design until requirements exist. If requirements are uncle
 
 </section>
 
+<section id="domain-awareness">
+
+SHOULD read `CONTEXT.md` at repo root before proceeding — use its vocabulary verbatim; never substitute synonyms.
+SHOULD scan `docs/adr/` for decisions in the area under analysis — respect accepted ADRs; do not re-litigate closed decisions.
+If neither exists, proceed without them. Do not create these files unprompted.
+
+</section>
+
 <section id="states">
 
 ### SD0: No Requirements Clarity
@@ -92,13 +100,14 @@ MUST NOT proceed with design until requirements exist. If requirements are uncle
 
 <section id="diagnostic-process">
 
-1. Confirm requirements exist — if not, redirect to `/empire-dev:distill`
-2. Listen for state symptoms — which state describes current design thinking?
-3. Start at the earliest problem state — MUST NOT skip ahead
-4. Ask key questions for that state
-5. Apply interventions — work through exercises
-6. Produce artifacts — document decisions that matter
-7. Define walking skeleton — know what to build first
+1. Read `CONTEXT.md` and relevant ADRs in `docs/adr/` if present — use domain vocabulary throughout
+2. Confirm requirements exist — if not, redirect to `/empire-dev:distill`
+3. Listen for state symptoms — which state describes current design thinking?
+4. Start at the earliest problem state — MUST NOT skip ahead
+5. Ask key questions for that state
+6. Apply interventions — work through exercises
+7. Produce artifacts — document decisions that matter
+8. Define walking skeleton — know what to build first
 
 </section>
 

@@ -52,6 +52,14 @@ description: >
 
 </section>
 
+<section id="domain-awareness">
+
+Before dispatch: read `CONTEXT.md` at repo root if present and include its vocabulary in each specialist brief — reviewers MUST use project terms verbatim.
+Read relevant ADRs from `docs/adr/` if present; include them in specialist briefs for architectural or design findings.
+If neither exists, proceed without them.
+
+</section>
+
 <section id="specialist-selection">
 
 - Inspect diff; pick 3–6 specialists matching change content
@@ -79,6 +87,8 @@ description: >
   - Full diff or PR number
   - List of changed files
   - User's stated intent (if provided)
+  - `CONTEXT.md` vocabulary (read from repo root before dispatch; include if file exists, omit if absent)
+  - Relevant ADRs from `docs/adr/` (include summaries of ADRs touching changed paths; omit if folder absent)
   - Output format instruction (see below)
   - "Do NOT post to GitHub. Report findings in chat only."
   - "Scope: review what the diff DOES; flag defects in changed lines + their direct blast radius."

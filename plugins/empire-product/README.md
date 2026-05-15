@@ -82,7 +82,7 @@ flowchart LR
 
 ### `distill`
 
-Diagnose requirements problems across six states — from no problem statement through validated requirements ready for design. Distinguishes problem from solution, surfaces hidden constraints, and bounds scope to a viable V1. Pairs with `/empire-dev:shape` as the upstream handoff. Findings stay local.
+Diagnose requirements problems across six states — from no problem statement through validated requirements ready for design. Distinguishes problem from solution, surfaces hidden constraints, and bounds scope to a viable V1. Reads `CONTEXT.md` and `docs/adr/` if present to ground requirements in project vocabulary. Pairs with `/empire-dev:shape` as the upstream handoff. Findings stay local.
 
 **Triggers:** "requirements analysis", "what should I build", "clarify requirements", "is this the right problem", "define scope", "distill requirements", "/empire-product:distill".
 
@@ -90,7 +90,7 @@ Diagnose requirements problems across six states — from no problem statement t
 
 ### `probe`
 
-Diagnose thinking failures and audit whether reasoning serves inquiry or defense. Two modes: self-monitoring (agent audits own reasoning) and user coaching (diagnose thinking pattern with questions, not declarations). Covers eight failure states from no orientation awareness through Monitor co-option — where the self-corrective machinery actively defends wrong conclusions. Findings stay local.
+Diagnose thinking failures and audit whether reasoning serves inquiry or defense. Two modes: self-monitoring (agent audits own reasoning) and user coaching (diagnose thinking pattern with questions, not declarations). Covers eight failure states from no orientation awareness through Monitor co-option — where the self-corrective machinery actively defends wrong conclusions. Reads `CONTEXT.md` if present — imprecise vocabulary can mask reasoning failures. Findings stay local.
 
 **Triggers:** "check my thinking", "am I reasoning well", "why am I stuck", "reasoning feels circular", "probe my logic", "conclusion feels defended", "/empire-product:probe".
 
