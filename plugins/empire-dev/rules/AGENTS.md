@@ -8,3 +8,7 @@ Skills installed under the `empire-dev` Claude Code plugin.
 - When independent subtasks exist, SHOULD dispatch specialist subagents in parallel; if isolation requirements are unclear, MUST ask whether subagents share one worktree or each get their own before dispatching
 - MUST route product prompt authoring (system prompts, agent definitions, tool descriptions, eval prompts for user's LLM features) through `ai-engineer` subagent — does not apply to project meta prompts (CLAUDE.md, SKILL.md, plugin rules)
 - Findings stay local in chat; never post to GitHub
+- MUST surface assumptions before implementing; present ambiguous interpretations, never pick silently
+- Surgical edits: every changed line MUST trace to the user's request — no drive-by refactors or adjacent touches
+- MUST remove imports/vars/functions YOUR edits made unused; MUST NOT remove pre-existing dead code unless asked
+- Simplicity: no speculative abstractions, no unrequested "flexibility" — min code that solves the problem
