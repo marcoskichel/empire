@@ -113,6 +113,18 @@ else
   exit 1
 fi
 
+# --- Test 11: concurrent adds all land (lock works) ---
+export CLAUDE_CODE_SESSION_ID="test-session-concurrent"
+CONC_REG="$HOME/.claude/sessions/$CLAUDE_CODE_SESSION_ID/active-worktrees.json"
+for i in $(seq 1 20); do
+  WT_CONC="$TMP_HOME/wt-conc-$i"
+  mkdir -p "$WT_CONC"
+  bash "$REGISTRY" add "feat/conc-$i" "$WT_CONC" --base "main" --repo-root "$TMP_HOME" &
+done
+wait
+conc_count=$(jq '.worktrees | length' "$CONC_REG")
+assert_eq "$conc_count" "20" "20 concurrent adds all land"
+
 # --- Test 10: malformed JSON resets ---
 export CLAUDE_CODE_SESSION_ID="test-session-malformed"
 malformed_file="$HOME/.claude/sessions/$CLAUDE_CODE_SESSION_ID/active-worktrees.json"

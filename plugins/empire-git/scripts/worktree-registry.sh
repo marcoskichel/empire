@@ -46,27 +46,6 @@ registry_file() {
   printf '%s/.claude/sessions/%s/active-worktrees.json' "$HOME" "$sid"
 }
 
-ensure_registry() {
-  local file="$1"
-  local dir
-  dir="$(dirname "$file")"
-  mkdir -p "$dir"
-  if [[ ! -f "$file" ]]; then
-    local sid
-    sid="$(basename "$dir")"
-    jq -n --arg sid "$sid" --arg now "$(iso_utc_now)" \
-      '{session_id: $sid, updated_at: $now, worktrees: []}' >"$file"
-    return
-  fi
-  if ! jq -e . "$file" >/dev/null 2>&1; then
-    warn "Registry file malformed — resetting: $file"
-    local sid
-    sid="$(basename "$dir")"
-    jq -n --arg sid "$sid" --arg now "$(iso_utc_now)" \
-      '{session_id: $sid, updated_at: $now, worktrees: []}' >"$file"
-  fi
-}
-
 atomic_write() {
   local file="$1"
   local content="$2"
@@ -76,16 +55,37 @@ atomic_write() {
   mv "$tmp" "$file"
 }
 
+ensure_registry() {
+  local file="$1"
+  local dir sid empty
+  dir="$(dirname "$file")"
+  mkdir -p "$dir"
+  sid="$(basename "$dir")"
+  if [[ ! -f "$file" ]]; then
+    empty="$(jq -n --arg sid "$sid" --arg now "$(iso_utc_now)" \
+      '{session_id: $sid, updated_at: $now, worktrees: []}')"
+    atomic_write "$file" "$empty"
+    return
+  fi
+  if ! jq -e . "$file" >/dev/null 2>&1; then
+    warn "Registry file malformed — resetting: $file"
+    empty="$(jq -n --arg sid "$sid" --arg now "$(iso_utc_now)" \
+      '{session_id: $sid, updated_at: $now, worktrees: []}')"
+    atomic_write "$file" "$empty"
+  fi
+}
+
 LOCK_DIR=""
 acquire_lock() {
   local file="$1"
   LOCK_DIR="${file}.lock"
+  mkdir -p "$(dirname "$LOCK_DIR")"
   local attempts=0
   while ! mkdir "$LOCK_DIR" 2>/dev/null; do
     attempts=$((attempts + 1))
-    if [[ -d "$LOCK_DIR" ]]; then
-      local lock_mtime now age
-      lock_mtime=$(stat -f %m "$LOCK_DIR" 2>/dev/null || stat -c %Y "$LOCK_DIR" 2>/dev/null || echo 0)
+    local lock_mtime now age
+    lock_mtime=$(stat -f %m "$LOCK_DIR" 2>/dev/null || stat -c %Y "$LOCK_DIR" 2>/dev/null || true)
+    if [[ -n "$lock_mtime" ]]; then
       now=$(date +%s)
       age=$((now - lock_mtime))
       if [[ "$age" -gt 30 ]]; then
@@ -94,8 +94,8 @@ acquire_lock() {
         continue
       fi
     fi
-    if [[ "$attempts" -gt 50 ]]; then
-      die "Could not acquire registry lock after 50 attempts: $LOCK_DIR"
+    if [[ "$attempts" -gt 300 ]]; then
+      die "Could not acquire registry lock after 300 attempts: $LOCK_DIR"
     fi
     sleep 0.1
   done
@@ -146,8 +146,9 @@ cmd_add() {
   require_jq
   local file
   file="$(registry_file)"
-  ensure_registry "$file"
+  mkdir -p "$(dirname "$file")"
   acquire_lock "$file"
+  ensure_registry "$file"
 
   local now
   now="$(iso_utc_now)"
@@ -192,6 +193,7 @@ cmd_remove() {
   file="$(registry_file)"
   [[ -f "$file" ]] || return 0
   acquire_lock "$file"
+  ensure_registry "$file"
 
   local updated
   updated="$(jq \
@@ -223,6 +225,7 @@ cmd_prune() {
   file="$(registry_file)"
   [[ -f "$file" ]] || return 0
   acquire_lock "$file"
+  ensure_registry "$file"
 
   local survivors="[]"
   while IFS= read -r entry; do
