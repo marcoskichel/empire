@@ -181,6 +181,14 @@ Cleanup complete:
   1 unmerged orphan branch kept (fix/half-done)
 ```
 
+After the cleanup actions complete, prune the session registry so it forgets any worktree directories that were removed:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" prune
+```
+
+If the call fails, print a warning and continue — registry hygiene is best-effort.
+
 ## Guiding principles
 
 **This is a housekeeping tool, not a destructive one.** The default posture is conservative — show what could be cleaned up, let the user decide. The `--dry-run` flag makes it completely safe to explore.

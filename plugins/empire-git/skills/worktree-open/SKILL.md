@@ -104,6 +104,22 @@ bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-setup.sh" "<branch-name>" --reopen
 
 The script auto-detects the package manager from lockfiles (pnpm, npm, yarn, bun, uv, poetry, pipenv, bundler, cargo, go modules) and runs the matching install command. No per-repo configuration is required.
 
+## Step 4.5 — Register the worktree
+
+After the setup script succeeds, record the worktree in the per-session registry so external tooling can discover it:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" add \
+  "<branch-name>" \
+  "<worktree-path>" \
+  --base "<base-branch>" \
+  --repo-root "<repo-root>"
+```
+
+The registry lives at `~/.claude/sessions/$CLAUDE_CODE_SESSION_ID/active-worktrees.json`. Re-opening an existing worktree refreshes its `opened_at` without duplicating the entry.
+
+If the registry call fails (e.g., `jq` missing), print a warning and continue — the worktree itself is still usable.
+
 ## Step 5 — Print result and next steps
 
 After the setup script completes, print:

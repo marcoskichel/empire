@@ -136,11 +136,19 @@ If `git branch -d` fails (branch not fully merged), tell the user:
 
 Do nothing. Confirm to the user that the worktree is still active.
 
-## Step 6 — Prune and confirm
+## Step 6 — Prune, deregister, and confirm
 
 ```bash
 git worktree prune
 ```
+
+Then remove the entry from the session registry (idempotent — no-op if absent):
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<worktree-path>"
+```
+
+If the registry call fails, print a warning and continue — the worktree removal already succeeded.
 
 Print a summary:
 

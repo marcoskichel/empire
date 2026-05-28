@@ -119,6 +119,57 @@ flowchart LR
 
 **Source:** [`skills/worktree-help/SKILL.md`](skills/worktree-help/SKILL.md)
 
+### `worktree-registry.sh` (helper script)
+
+Per-session JSON registry of worktrees opened by the current Claude Code session. `worktree-open`, `worktree-close`, and `worktree-cleanup` maintain it automatically; external tooling (e.g. a tmux keybind that opens nvim in the active worktree) can read it directly.
+
+**Storage:** `~/.claude/sessions/$CLAUDE_CODE_SESSION_ID/active-worktrees.json`
+
+**Schema:**
+
+```json
+{
+  "session_id": "<uuid>",
+  "updated_at": "<UTC ISO-8601>",
+  "worktrees": [
+    {
+      "branch": "feat/auth",
+      "path": "/abs/path/to/worktree",
+      "base": "main",
+      "repo_root": "/abs/path/to/main/repo",
+      "created_at": "<UTC ISO-8601>",
+      "opened_at": "<UTC ISO-8601>"
+    }
+  ]
+}
+```
+
+The `worktrees` array is always sorted ascending by `created_at`. `opened_at` refreshes when a worktree is reopened; `created_at` is immutable.
+
+**Subcommands:**
+
+```bash
+bash plugins/empire-git/scripts/worktree-registry.sh add <branch> <path> --base <base> --repo-root <root>
+bash plugins/empire-git/scripts/worktree-registry.sh remove <path>
+bash plugins/empire-git/scripts/worktree-registry.sh list [--json]
+bash plugins/empire-git/scripts/worktree-registry.sh prune
+bash plugins/empire-git/scripts/worktree-registry.sh has <path>
+```
+
+**External discovery example (tmux + nvim):**
+
+```bash
+# Resolve the active Claude session's worktrees, then pick one with fzf
+pane_pid=$(tmux display-message -p '#{pane_pid}')
+claude_pid=$(pgrep -P "$pane_pid" claude | head -1)
+sid=$(ps eww -p "$claude_pid" -o command= 2>/dev/null \
+  | tr ' ' '\n' | sed -n 's/^CLAUDE_CODE_SESSION_ID=//p' | head -1)
+wt=$(jq -r '.worktrees[].path' "$HOME/.claude/sessions/$sid/active-worktrees.json" | fzf)
+[ -d "$wt" ] && tmux new-window -c "$wt" nvim
+```
+
+**Source:** [`scripts/worktree-registry.sh`](scripts/worktree-registry.sh)
+
 ### `pr-description`
 
 Canonical PR description template. Senior-dev voice, ≤200 words. Sections: Why, What changed (behavior only, most important only), Risk (optional — omit when trivial), Test plan (omit for simple/hard-to-test diffs; never CI steps). Adds `Depends on: <PR URL>` for PR chains. Idempotent `<!-- pr-description:start/end -->` markers so user-added content (screenshots, `Fixes #N`, task lists) survives updates. Uses `CONTEXT.md` vocabulary for domain terms if present. Output goes to stdout for the caller to pipe into `gh pr create --body-file -` or `gh pr edit --body-file -`.
