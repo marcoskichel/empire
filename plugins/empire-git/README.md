@@ -158,13 +158,16 @@ bash plugins/empire-git/scripts/worktree-registry.sh has <path>
 
 **External discovery example (tmux + nvim):**
 
+The `claude` binary does not have `CLAUDE_CODE_SESSION_ID` in its own env — it generates the id at startup and only injects it into spawned subprocesses. So instead of process-walking, match registry files by `repo_root` and pick the most recently updated one for the current repo:
+
 ```bash
-# Resolve the active Claude session's worktrees, then pick one with fzf
-pane_pid=$(tmux display-message -p '#{pane_pid}')
-claude_pid=$(pgrep -P "$pane_pid" claude | head -1)
-sid=$(ps eww -p "$claude_pid" -o command= 2>/dev/null \
-  | tr ' ' '\n' | sed -n 's/^CLAUDE_CODE_SESSION_ID=//p' | head -1)
-wt=$(jq -r '.worktrees[].path' "$HOME/.claude/sessions/$sid/active-worktrees.json" | fzf)
+repo=$(git -C "$(tmux display-message -p '#{session_path}')" rev-parse --show-toplevel)
+reg=$(for f in "$HOME"/.claude/sessions/*/active-worktrees.json; do
+  jq -e --arg r "$repo" '.worktrees | any(.repo_root == $r)' "$f" >/dev/null 2>&1 \
+    && printf '%s\t%s\n' "$(jq -r .updated_at "$f")" "$f"
+done | sort -r | head -1 | cut -f2)
+wt=$(jq -r --arg r "$repo" \
+  '.worktrees | map(select(.repo_root == $r)) | .[].path' "$reg" | fzf)
 [ -d "$wt" ] && tmux new-window -c "$wt" nvim
 ```
 
