@@ -31,6 +31,11 @@
       "description": "Product intelligence: pitches (pitch), idea pressure-testing (vet), competitor mapping (recon), deck generation (deck), and naming (mint) plus three bundled subagents."
     },
     {
+      "name": "empire-visual",
+      "source": "./plugins/empire-visual",
+      "description": "Visual-first communication: a 'visual-first' output style that leads with diagrams plus an on-demand visualize skill for terminal-native ASCII architecture, flowcharts, state machines, and tables."
+    },
+    {
       "name": "empire-rules",
       "source": "./plugins/empire-rules",
       "description": "Utility: sync per-plugin routing snippets into the project's AGENTS.md. Auto-installed as a dependency of other empire-* plugins."

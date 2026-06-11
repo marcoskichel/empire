@@ -1,7 +1,7 @@
 {
   "name": "empire",
-  "version": "1.7.1",
-  "description": "Meta plugin: installs the full empire suite (empire-git, empire-dev, empire-research, empire-product).",
+  "version": "1.8.0",
+  "description": "Meta plugin: installs the full empire suite (empire-git, empire-dev, empire-research, empire-product, empire-visual).",
   "author": {
     "name": "Marcos Kichel",
     "url": "https://github.com/marcoskichel"
@@ -10,5 +10,5 @@
   "repository": "https://github.com/marcoskichel/empire",
   "license": "MIT",
   "keywords": ["claude-code", "skills", "solo-founder", "indie", "bundle"],
-  "dependencies": ["empire-git", "empire-dev", "empire-research", "empire-product"]
+  "dependencies": ["empire-git", "empire-dev", "empire-research", "empire-product", "empire-visual"]
 }
