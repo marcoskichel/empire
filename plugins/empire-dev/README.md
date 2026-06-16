@@ -37,6 +37,25 @@ flowchart LR
 
 **Source:** [`skills/team-review/SKILL.md`](skills/team-review/SKILL.md)
 
+### `handoff`
+
+Autonomously drive one task from intent to a labelled PR with green CI. Chains the workflow end-to-end: open a worktree, plan (via `superpowers:writing-plans` when a spec exists), implement, run `team-review`, auto-apply consensus fixes while flagging low-confidence/conflicting/behaviour-changing ones, open the PR (body via `pr-description`), watch CI in a bounded fix loop, and assign labels from the repo's actual label set. Invoking the skill is the ship-intent signal — it authorizes push and PR creation without per-step confirmation — but it hard-stops on ambiguous requirements, destructive/irreversible actions, security calls, scope explosions, and external side effects. Judgment calls are flagged for human review in a "Decisions & flags" PR section and the final chat report rather than guessed silently.
+
+**Triggers:** "handoff this", "take this to a PR", "drive this to done", "implement and ship this", "do the whole thing", "run this autonomously", "take it from here", "/empire-dev:handoff".
+
+```mermaid
+flowchart LR
+  spec[Spec?] --> plan[Plan]
+  plan --> impl[Implement]
+  impl --> review[team-review]
+  review --> address[Address + flag]
+  address --> pr[Open PR]
+  pr --> ci[Watch CI]
+  ci --> label[Label]
+```
+
+**Source:** [`skills/handoff/SKILL.md`](skills/handoff/SKILL.md)
+
 ### `weigh`
 
 Systematically evaluate architecture decisions, document trade-offs, and select appropriate patterns for context. Generates weighted decision matrices and writes ADRs to `docs/adr/NNNN-<slug>.md` with LLM-queryable frontmatter (`adr`, `title`, `date`, `status`, `supersedes`, `tags`, `modules`). Applies refactoring patterns (Branch by Abstraction, Strangler Fig, Parallel Run). Reads `CONTEXT.md` and existing ADRs before analysis. Findings stay local.
