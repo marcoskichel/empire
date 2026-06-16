@@ -1,10 +1,10 @@
 ---
 name: mint
 description: >
-  Diagnose why names don't work and guide creation of names that do — covers brand
-  names, product names, skill names, character names, place names, and titles.
-  Use when a name feels wrong but no one can say why, when a family of names feels
-  disjointed, when a name is forgettable, or when systematic naming is needed.
+  Diagnose why names don't work and guide creation of names that do — brand, product,
+  skill, character, place names, and titles. Use when a name feels wrong but no one can
+  say why, a name family feels disjointed, a name is forgettable, or systematic naming
+  is needed.
   Trigger phrases: "name this", "this name doesn't feel right", "brand naming",
   "product naming", "names don't match", "forgettable name", "wrong associations",
   "mint a name", "/empire-product:mint".
@@ -83,63 +83,16 @@ Four layers: sound, meaning, cultural, functional. Problems arise from layer con
 
 <section id="layers">
 
-### Sound Layer
+Four layers to check for alignment: sound, meaning, cultural, functional. Misalignment is what makes a name "feel wrong."
 
-| Sound Pattern                | Association                    | Use For                            |
-| ---------------------------- | ------------------------------ | ---------------------------------- |
-| Depth sounds (ɑ, o, u, m, n) | Weight, seriousness, gravitas  | Authority brands, serious products |
-| Light sounds (i, e, l, s)    | Speed, precision, elegance     | Tech, luxury, agile brands         |
-| Power sounds (k, t, p, x)    | Strength, impact, decisiveness | Performance, action brands         |
-| Flow sounds (l, r, w)        | Movement, continuity, grace    | Movement, creative, flow states    |
-| Tech sounds (x, z, -ix, -ex) | Modern, digital, technical     | Tech products, futuristic contexts |
-
-High-frequency sounds feel natural and trustworthy (t, n, s, k, m, p, l, r). Low-frequency sounds feel distinctive and exotic (x, z, q). Use common sounds for accessibility; rare sounds for distinctiveness. Too many rare sounds = unpronounceable.
-
-| Syllable Pattern | Feel                | Example       |
-| ---------------- | ------------------- | ------------- |
-| CV               | Open, flowing       | Sora, Kano    |
-| CVC              | Solid, complete     | Mark, Bond    |
-| CVCV             | Balanced, memorable | Toyota, Roku  |
-| CCV              | Dynamic, energetic  | Slack, Stripe |
-
-### Meaning Layer
-
-| Type         | Description              | Example        |
-| ------------ | ------------------------ | -------------- |
-| Descriptive  | Says what it is          | General Motors |
-| Metaphorical | Implies qualities        | Amazon, Apple  |
-| Abstract     | Coined, meaning assigned | Kodak, Xerox   |
-| Portmanteau  | Blended words            | Pinterest      |
-
-Best names work on multiple levels — literal, metaphorical, and cultural.
-
-### Cultural Layer
-
-| Category        | Convention                                    |
-| --------------- | --------------------------------------------- |
-| Luxury fashion  | French/Italian sounds                         |
-| Tech startups   | Dropped vowels, -ly, -ify                     |
-| Developer tools | Short verbs, power sounds (vet, recon, probe) |
-| Pharmaceuticals | X, Z, scientific suffixes                     |
-
-Strategic choice: follow conventions to signal belonging; break them to differentiate.
-
-### Functional Layer
-
-| Test          | Pass Criterion                  |
-| ------------- | ------------------------------- |
-| Spelling      | Intuitive from pronunciation    |
-| Pronunciation | Intuitive from spelling         |
-| Typing        | No awkward key combinations     |
-| Search        | Returns relevant results        |
-| Domain        | Available or acceptable variant |
+Full lookup catalog — sound patterns, syllable templates, meaning types, cultural conventions, functional tests — in `references/layers.md`. Read it for brand/product naming or any deep layer analysis; quick naming can work from the states alone.
 
 </section>
 
 <section id="diagnostic-process">
 
 1. **Identify the problem state** — N1 (feels wrong), N2 (disjointed family), N3 (forgettable), N4 (wrong signals), N5 (practical issues)
-2. **Analyze by layer** — sound, meaning, cultural, functional. Check alignment.
+2. **Analyze by layer** — sound, meaning, cultural, functional. Check alignment (catalog in `references/layers.md`).
 3. **Identify conflicts** — where do layers contradict?
 4. **Recommend interventions** — based on identified state and conflicts
 
