@@ -1,13 +1,12 @@
 ---
 name: sync-rules
 description: >
-  Reconcile per-plugin skill-routing snippets from installed empire-* plugins
-  into a target rules file (project AGENTS.md or user-global
-  ~/.claude/CLAUDE.md). Idempotent. Use when the user asks to "sync empire
-  rules", "update AGENTS.md from empire", "apply empire routing rules",
-  "install empire skill rules", "refresh empire CLAUDE.md", "rewrite empire
-  rules", or after installing or updating an empire-* plugin and wanting its
-  routing block written to the rules file.
+  Reconcile empire-* plugin skill-routing snippets into a rules file (project
+  AGENTS.md or user-global ~/.claude/CLAUDE.md). Idempotent. Use when the user
+  asks to "sync empire rules", "update AGENTS.md from empire", "apply empire
+  routing rules", "install empire skill rules", "refresh empire CLAUDE.md",
+  "rewrite empire rules", or after installing/updating an empire-* plugin to
+  write its routing block.
 argument-hint: "[plugin] [--scope user|project|both]"
 allowed-tools: Bash, Read, Write
 ---
@@ -53,14 +52,14 @@ Reconcile installed empire-\* plugin snippets into a rules file. Default target 
 
    When `--scope both`, the script emits two pairs. Process them sequentially: Write the user-scope pair first, then the project-scope pair.
 
-## Argument
+## Arguments
 
-- `[plugin]`: optional plugin name (e.g. `empire-git`). Restricts reconciliation to that plugin's marker block.
+- `[plugin]`: optional plugin name (e.g. `empire-git`). Restricts reconciliation to that plugin's marker block; other empire blocks are left untouched.
 - `--scope user|project|both`: optional. When passed, the script uses that scope; otherwise it auto-detects from existing markers and exits 3 if neither file has them.
 
 ## Rules for the model
 
-- The `Write` tool's `content` parameter MUST be byte-identical to the `Read` result of `NEW_FILE`. Do not paraphrase, reformat list bullets, normalize whitespace, fix typos, or "improve" markdown. Copy the bytes exactly.
+- The `Write` tool's `content` parameter MUST be byte-identical to the `Read` result of `NEW_FILE`. Do not paraphrase, reformat list bullets, normalize whitespace, fix typos, or "improve" markdown. Copy the bytes exactly. The script already reconciled the content between its markers; any drift makes the next sync report a spurious diff and breaks idempotency.
 - Do not invoke `Edit` or `Write` on a target before showing the script's preview output to the user.
 - Do not invent flags. Only `--scope <user|project|both>` and a positional plugin name are valid.
 - If the script exits 1 or any other unexpected non-zero, surface its stderr exactly and stop. Do not retry.

@@ -1,6 +1,6 @@
 {
   "name": "empire-rules",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Sync hand-authored skill-routing rules from installed empire-* plugins into a target rules file (project AGENTS.md or user-global ~/.claude/CLAUDE.md).",
   "author": {
     "name": "Marcos Kichel",
