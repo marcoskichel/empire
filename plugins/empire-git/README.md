@@ -121,7 +121,7 @@ flowchart LR
 
 ### `worktree-registry.sh` (helper script)
 
-Per-session JSON registry of worktrees opened by the current Claude Code session. `worktree-open`, `worktree-close`, and `worktree-cleanup` maintain it automatically; external tooling (e.g. a tmux keybind that opens nvim in the active worktree) can read it directly.
+Per-session JSON registry of worktrees opened by the current Claude Code session. `worktree-open`, `worktree-close`, `worktree-merge`, and `worktree-cleanup` maintain it automatically; external tooling (e.g. a tmux keybind that opens nvim in the active worktree) can read it directly.
 
 **Storage:** `~/.claude/sessions/$CLAUDE_CODE_SESSION_ID/active-worktrees.json`
 
