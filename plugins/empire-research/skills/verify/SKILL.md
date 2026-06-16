@@ -5,7 +5,8 @@ description: >
   confabulations, unsupported assertions. MUST be a separate pass from
   generation; cannot reliably self-check in one pass. Use after research
   synthesis or content generation, or whenever claim accuracy matters before
-  delivery.
+  delivery. For external claims (social media, sources), use
+  `/empire-research:dissect`.
   Trigger phrases: "fact-check this", "verify these claims", "check for hallucinations",
   "second pass on accuracy", "verify the output", "is this accurate",
   "/empire-research:verify".

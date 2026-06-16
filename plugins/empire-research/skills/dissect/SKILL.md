@@ -5,7 +5,7 @@ description: >
   resolve vague entities, verify each independently, separate confirmed facts
   from narrative interpretation. Use to fact-check complex claims, investigate
   narratives mixing fact with interpretation, or when a claim bundles multiple
-  assertions.
+  assertions. For AI-generated output, use `/empire-research:verify` instead.
   Trigger phrases: "investigate this claim", "fact-check this", "is this true",
   "decompose this narrative", "viral content check", "trace this claim",
   "/empire-research:dissect".
