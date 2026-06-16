@@ -21,7 +21,7 @@ IMPORTANT: Output the rendered description verbatim. Do not summarize, paraphras
 
 - Senior dev writing for peers. Direct. Active voice. Imperative mood.
 - One idea per sentence. Short sentences. Lead with the point. Cut every word that adds no information; a reviewer should grasp each line in one pass.
-- No dashes as connectors in prose. Avoid the em dash (`—`), en dash (`–`), and the spaced hyphen (` - `); they read as machine written. Split into two sentences or use a comma or colon. Hyphenated words like `off-by-one` and Markdown list bullets stay fine.
+- No dashes as connectors in prose. Avoid the em dash (`—`), en dash (`–`), and the spaced hyphen (`-`); they read as machine written. Split into two sentences or use a comma or colon. Hyphenated words like `off-by-one` and Markdown list bullets stay fine.
 - No "this PR", "this commit", "I am", "we", filler openers.
 - Explain why and what users or callers experience differently. Cut anything obvious from the diff.
 - No emoji. No H1. No marketing tone. No "N/A".
@@ -29,10 +29,10 @@ IMPORTANT: Output the rendered description verbatim. Do not summarize, paraphras
 
 ## Length
 
-| Diff size | Budget                                                    |
-| --------- | --------------------------------------------------------- |
-| ≤ 100 LOC | ≤ 80 words, drop Test plan unless non-trivial             |
-| ≤ 500 LOC | ≤ 200 words, include only non-empty sections              |
+| Diff size | Budget                                                                |
+| --------- | --------------------------------------------------------------------- |
+| ≤ 100 LOC | ≤ 80 words, drop Test plan unless non-trivial                         |
+| ≤ 500 LOC | ≤ 200 words, include only non-empty sections                          |
 | > 500 LOC | ≤ 200 words, summarize at higher level, note the size in What changed |
 
 Skip empty sections entirely.
