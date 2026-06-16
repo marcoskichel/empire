@@ -1,14 +1,12 @@
 ---
 name: pitch
 description: >
-  Generate a personal elevator pitch or a repository/project pitch. Use when
-  user asks for "elevator pitch", "pitch this project", "introduce myself",
+  Generate a personal elevator pitch or a repository/project pitch.
+  Trigger phrases: "elevator pitch", "pitch this project", "introduce myself",
   "personal pitch", "how do I pitch myself", "pitch for this repo",
-  "/empire-product:pitch", or wants a "tell me about yourself" answer. Also
-  triggers on: "what's a good way to introduce this", "explain this repo in
-  one line", "describe this project", "intro paragraph", "tagline",
-  "one-liner", "GitHub repo description", "package.json description", "what
-  does this do".
+  "/empire-product:pitch", "tell me about yourself", "what's a good way to introduce this",
+  "explain this repo in one line", "describe this project", "intro paragraph", "tagline",
+  "one-liner", "GitHub repo description", "package.json description", "what does this do".
 ---
 
 # Elevator Pitch Generator

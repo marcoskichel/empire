@@ -1,14 +1,14 @@
 ---
 name: probe
 description: >
-  Diagnose thinking failures and audit whether reasoning serves inquiry or defense.
-  Use when reasoning feels stuck or circular, a conclusion feels defended rather than
-  discovered, confidence is high but evidence is thin, analysis grows more elaborate
-  without becoming more accurate, or same approach keeps failing.
+  Diagnose thinking failures; audit whether reasoning serves inquiry or defense.
+  Use when reasoning feels stuck or circular, a conclusion feels defended not discovered,
+  confidence is high but evidence thin, analysis grows elaborate without growing accurate,
+  or the same approach keeps failing.
   Trigger phrases: "check my thinking", "am I reasoning well", "why am I stuck",
   "reasoning feels circular", "probe my logic", "/empire-product:probe".
-  Two modes: self-monitoring (agent audits own process) and user coaching (diagnose
-  user's thinking pattern with questions, not declarations).
+  Two modes: self-monitoring (audit own process) and user coaching (diagnose user's
+  thinking with questions, not declarations).
 ---
 
 <section id="core">
