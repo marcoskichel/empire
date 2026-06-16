@@ -1,13 +1,12 @@
 ---
 name: worktree-cleanup
 description: >
-  Batch cleanup across MULTIPLE stale worktrees and orphaned branches. Use this
-  when the user wants to tidy up accumulated worktrees, asks about old
-  branches, mentions cleaning up their workspace, says "stale worktrees",
-  "orphan branches", "prune worktrees", "clean up old branches", "purge stale
-  worktrees", or "housekeeping". For finishing ONE specific worktree, use
-  worktree-close instead. Also triggers for `/empire-git:worktree-cleanup
-  [--dry-run] [--days N]`.
+  Batch cleanup across MULTIPLE stale worktrees and orphaned branches. Use
+  when tidying up accumulated worktrees, asking about old branches, cleaning up
+  the workspace, or saying "stale worktrees", "orphan branches", "prune
+  worktrees", "clean up old branches", "purge stale worktrees", "housekeeping".
+  For finishing ONE specific worktree, use worktree-close instead. Also
+  triggers for `/empire-git:worktree-cleanup [--dry-run] [--days N]`.
 model: haiku
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[--dry-run] [--days N]"

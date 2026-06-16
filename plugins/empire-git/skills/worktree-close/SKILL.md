@@ -1,14 +1,13 @@
 ---
 name: worktree-close
 description: >
-  Finish work in a SINGLE worktree — push, remove the worktree, and optionally
-  delete the branch. Use this when the user is done with a specific worktree,
-  wants to wrap one up, push and move on, or no longer needs a parallel
-  environment. Triggers on phrases like "close this worktree", "I'm done with
-  this worktree", "wrap up this branch", "push and remove", "tear down this
-  worktree". For batch cleanup of MULTIPLE stale worktrees, use
-  worktree-cleanup instead. Also triggers for `/empire-git:worktree-close
-  [branch] [--push] [--discard] [--force]`.
+  Finish work in a SINGLE worktree: push, remove the worktree, optionally
+  delete the branch. Use when done with a specific worktree, wrapping one up,
+  pushing and moving on, or no longer needing a parallel environment. Triggers
+  on "close this worktree", "I'm done with this worktree", "wrap up this
+  branch", "push and remove", "tear down this worktree". For batch cleanup of
+  MULTIPLE stale worktrees, use worktree-cleanup instead. Also triggers for
+  `/empire-git:worktree-close [branch] [--push] [--discard] [--force]`.
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[branch | path] [--push] [--discard] [--force]"
