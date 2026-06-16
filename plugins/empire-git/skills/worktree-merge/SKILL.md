@@ -1,16 +1,15 @@
 ---
 name: worktree-merge
 description: >
-  Fold ONE worktree's branch INTO another branch using git merge. Use this
-  when the user wants to combine a worktree branch into a parent branch,
-  batch small fixes into one branch before opening a single PR, or fold
-  sub-feature branches back together. Triggers on phrases like "merge this
-  worktree into X", "fold sub-branches back", "combine worktree branches",
-  "merge feat/X into main locally". This is always a real `git merge` and
-  defaults to `--no-ff`. For pushing to remote, use `worktree-close --push`
-  instead. For batch teardown of stale worktrees, use worktree-cleanup. Also
-  triggers for `/empire-git:worktree-merge [branch] --into <target>
-  [--no-close] [--ff]`.
+  Fold ONE worktree's branch INTO another branch using git merge. Use when
+  combining a worktree branch into a parent, batching small fixes into one
+  branch before opening a single PR, or folding sub-feature branches back
+  together. Triggers on "merge this worktree into X", "fold sub-branches
+  back", "combine worktree branches", "merge feat/X into main locally". Always
+  a real `git merge`, defaults to `--no-ff`. For pushing to remote, use
+  `worktree-close --push` instead. For batch teardown of stale worktrees, use
+  worktree-cleanup. Also triggers for `/empire-git:worktree-merge [branch]
+  --into <target> [--no-close] [--ff]`.
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "<branch> --into <target> [--no-close] [--ff]"
@@ -122,21 +121,36 @@ Otherwise, present the same cleanup options as `/empire-git:worktree-close`:
 
 After a successful merge, default to option 2 — the branch's commits are now in the target, so the source branch has served its purpose.
 
-Execute the chosen option:
+Execute the chosen option. Anchor every command to the main working tree with `git -C` so it runs regardless of the shell's cwd — the session may be sitting inside the source worktree, and removing that directory would otherwise break the next Bash call before it starts:
 
 ```bash
-# Option 1 or 2: remove the worktree
-git worktree remove "<source-worktree-path>"
-
-# Option 2 only: also delete the branch (safe delete)
-git branch -d "<source-branch>"
+MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print $2; exit }')
 ```
 
-Then prune:
+### Option 1: remove worktree only
 
 ```bash
-git worktree prune
+git -C "$MAIN_REPO" worktree remove "<source-worktree-path>"
 ```
+
+### Option 2: remove worktree + delete branch
+
+Run both commands in a **single Bash call**, chained with `&&`. `git branch -d` refuses to delete a branch still checked out in a worktree, so the worktree must be removed first. Chaining in one shell invocation means the cwd is resolved once at launch — before the worktree directory disappears — so the branch delete still runs even if the session was inside that worktree.
+
+```bash
+git -C "$MAIN_REPO" worktree remove "<source-worktree-path>" && git -C "$MAIN_REPO" branch -d "<source-branch>"
+```
+
+If `git branch -d` fails, the branch has commits beyond what was merged — surface that rather than force-deleting.
+
+### Then prune and deregister
+
+```bash
+git -C "$MAIN_REPO" worktree prune
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<source-worktree-path>"
+```
+
+If the registry call fails, print a warning and continue — the worktree removal already succeeded.
 
 Print a summary of what was done.
 
