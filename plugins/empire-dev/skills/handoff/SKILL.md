@@ -1,19 +1,17 @@
 ---
 name: handoff
 description: >
-  Use for `/empire-dev:handoff` and whenever one request chains multiple
-  delivery stages on a single coding task into one unattended run — implement
-  it, get it reviewed, address the feedback, open the PR, make CI pass, add
-  labels — and the user wants the finished pull request rather than a check-in
-  at each step. Trigger phrases: "handoff this", "drive this to a PR", "take
-  this and run with it", "implement, review, and open a PR", "build it, have
-  the team review, then push a PR", "do the whole thing", "run this
-  autonomously", "I'm stepping away — carry this to a PR", "ship this for me".
-  Often points at a ticket or spec file. Invoking the skill is the ship-intent
-  signal — it authorizes the full push-and-PR chain. NOT for a single stage in
-  isolation (only review, only a PR body, only implement, only a plan) — those
-  have their own skills. Flags judgment calls for human review instead of
-  guessing silently.
+  Use for `/empire-dev:handoff` and when one coding task should run unattended
+  through the full chain — implement, review, address feedback, open the PR,
+  pass CI, label — delivering a finished pull request, not a check-in per step.
+  Often points at a ticket or spec. Invoking the skill IS the ship-intent
+  signal: it authorizes the full push-and-PR chain. NOT for a single stage in
+  isolation (review, PR body, implement, plan each have their own skills).
+  Flags judgment calls for human review instead of guessing silently. Trigger
+  phrases: "handoff this", "drive this to a PR", "take this and run with it",
+  "implement, review, and open a PR", "build it, have the team review, then
+  push a PR", "do the whole thing", "run this autonomously", "I'm stepping
+  away — carry this to a PR", "ship this for me".
 allowed-tools: Bash Read Edit Write Glob Grep Skill Agent TodoWrite
 argument-hint: "[task description | spec path]"
 ---
@@ -97,7 +95,7 @@ Here handoff deliberately **overrides** team-review's wait-for-the-user gate. Th
 | Nits                                                                     | Apply if trivial; otherwise drop. Don't flag nits — noise.                       |
 | Any fix that changes intended behaviour, public API, or security posture | Flag, don't apply. That's a product decision.                                    |
 
-After applying, re-run the project's checks. If fixes are substantial, a re-review pass is reasonable but not mandatory — use judgment on whether the change surface warrants it. A re-dispatched `team-review` will hit its own wait-for-the-user confirmation gate; handoff overrides that gate the same way this phase does — apply the safe tier, flag the rest, keep moving. Don't let an autonomous run silently stall waiting for input it promised not to need.
+After applying, re-run the project's checks. A re-review pass is optional — use judgment on whether the change surface warrants it. If you re-dispatch `team-review`, it hits its own wait-for-the-user gate; override it exactly as this phase does — apply the safe tier, flag the rest, keep moving. Never let an autonomous run stall waiting for input it promised not to need.
 
 </section>
 
