@@ -2,13 +2,13 @@
 name: visualize
 description: >
   Turn a concept, codebase, flow, or comparison into a diagram instead of a wall of
-  text. Produces terminal-native ASCII architecture diagrams, flowcharts, state
-  machines, sequences, trees, and comparison tables — and mermaid only when the output
-  targets GitHub or a markdown viewer. Use when the user wants something drawn, mapped,
-  or visualized rather than described in prose.
-  Trigger phrases: "draw this", "diagram this", "visualize", "show me a diagram",
-  "map this out", "flowchart", "architecture diagram", "sequence diagram", "state
-  machine", "ascii diagram", "make this visual", "/empire-visual:visualize".
+  text — terminal-native ASCII (architecture, flowcharts, state machines, sequences,
+  trees, comparison tables); mermaid only when output targets GitHub or a markdown
+  viewer. Use when the user wants something drawn, mapped, or visualized rather than
+  described in prose. Trigger phrases: "draw this", "diagram this", "visualize", "show
+  me a diagram", "map this out", "flowchart", "architecture diagram", "sequence
+  diagram", "state machine", "ascii diagram", "make this visual",
+  "/empire-visual:visualize".
 allowed-tools: Read, Grep, Glob
 ---
 
@@ -82,77 +82,7 @@ Badly built diagrams read as visual noise — worse than prose. Enforce:
 
 <section id="templates">
 
-**ASCII architecture (box-drawing):**
-
-```
-┌─────────────┐     ┌─────────────┐
-│   Client    │────▶│   API/BFF   │
-└─────────────┘     └──────┬──────┘
-                           │
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        ┌─────────┐  ┌─────────┐  ┌─────────┐
-        │  Auth   │  │  Orders │  │  Cache  │
-        └─────────┘  └────┬────┘  └─────────┘
-                          ▼
-                    ┌─────────┐
-                    │   DB    │
-                    └─────────┘
-```
-
-**Indented tree (hierarchy):**
-
-```
-app/
-├── api/        request handlers
-│   ├── auth/   login, tokens
-│   └── orders/ CRUD + checkout
-├── core/       domain logic (no I/O)
-└── db/         repositories
-```
-
-**Flowchart (control flow):**
-
-```
-        ┌───────────┐
-        │  request  │
-        └─────┬─────┘
-              ▼
-        ╱ token? ╲──no──▶ 401
-        ╲        ╱
-           │ yes
-           ▼
-        ┌───────────┐
-        │  handle   │──▶ 200
-        └───────────┘
-```
-
-**State machine:**
-
-```
-  [idle] ──start──▶ [running] ──done──▶ [complete]
-                       │
-                     error
-                       ▼
-                    [failed] ──retry──▶ [running]
-```
-
-**Sequence (call order):**
-
-```
-Client → API:   POST /orders
-API    → Auth:  verify(token)
-Auth   → API:   ok
-API    → DB:    insert(order)
-API    → Client: 201 Created
-```
-
-**Quantity (ASCII bar):**
-
-```
-p50  ██░░░░░░░░  12ms
-p95  ██████░░░░  48ms
-p99  █████████░  91ms
-```
+For copy-ready ASCII shapes — architecture, tree, flowchart, state machine, sequence,
+quantity bars — read `references/diagram-templates.md`.
 
 </section>
