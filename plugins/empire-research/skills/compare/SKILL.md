@@ -6,10 +6,9 @@ description: >
   head", "X vs Y", "which is better", "tooling comparison", "weigh these
   options", "decide between these". Closed comparison of tools, libraries,
   frameworks, vendors, or architectural choices — NOT competitors (use
-  `/empire-product:recon` for competitor mapping). User already has a known
-  set of options; skill produces a side-by-side matrix across user-defined
-  dimensions and recommends a winner. Findings stay local — never posted
-  externally.
+  `/empire-product:recon`). User has a known option set; produces a
+  side-by-side matrix on user-defined dimensions and recommends a winner.
+  Findings stay local — never posted externally.
 ---
 
 <section id="purpose-vs-explore">
@@ -95,6 +94,7 @@ User can add, remove, or reweight dimensions before dispatch.
   ```
 
 - Cap each agent response under 400 words
+- Isolation rationale: each agent scores its option blind to rivals — independent, evidence-based scores with no anchoring bias; head-to-head comparison happens only in consolidation
 
 </section>
 

@@ -5,9 +5,9 @@ description: >
   "research approaches", "/empire-research:explore",
   "investigate approaches", "spawn research team", "what are the options",
   "options analysis", "explore solutions", "have the team explore". Open-ended
-  exploration: shallow scan to enumerate 3–5 candidate approaches, user picks
+  exploration: shallow scan enumerates 3–5 candidate approaches, user picks
   subset to deep-dive, parallel research per approach, consolidated comparison
-  with a recommended direction. Findings stay local — never posted externally.
+  with recommended direction. Findings stay local — never posted externally.
 ---
 
 <section id="purpose-vs-compare">
@@ -63,6 +63,7 @@ description: >
 
 <section id="user-gate">
 
+- Gate exists because deep-dive spawns one parallel agent per approach (real cost) — user steers spend toward the approaches worth researching
 - After shallow scan, present results and ask user:
   - Which approaches to deep-dive (may pick multiple)
   - Whether to add, remove, or reframe any approach

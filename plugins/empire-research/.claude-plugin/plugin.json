@@ -1,6 +1,6 @@
 {
   "name": "empire-research",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Research collaboration: open-ended exploration (explore), closed comparison (compare), hallucination checking (verify), and claim investigation (dissect), with parallel agent dispatch and consolidated reports. Bundles research-analyst as a fallback subagent.",
   "dependencies": ["empire-rules"],
   "author": {
