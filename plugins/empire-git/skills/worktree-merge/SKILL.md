@@ -121,31 +121,25 @@ Otherwise, present the same cleanup options as `/empire-git:worktree-close`:
 
 After a successful merge, default to option 2 — the branch's commits are now in the target, so the source branch has served its purpose.
 
-Execute the chosen option. Anchor every command to the main working tree with `git -C` so it runs regardless of the shell's cwd — the session may be sitting inside the source worktree, and removing that directory would otherwise break the next Bash call before it starts:
-
-```bash
-MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print $2; exit }')
-```
+Run the chosen option as a **single Bash call**. The session may be sitting inside the source worktree, so each block resolves the main working tree once and anchors every git command with `git -C "$MAIN_REPO"` — nothing depends on the shell's cwd, which vanishes the instant the worktree is removed. One invocation also keeps `MAIN_REPO` in scope: shell variables do not survive across separate Bash calls, so the assignment must live in the same call as its uses. `awk` reads the path with `substr($0, 10)` rather than `$2` so worktree paths containing spaces are not truncated.
 
 ### Option 1: remove worktree only
 
 ```bash
+MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print substr($0, 10); exit }')
 git -C "$MAIN_REPO" worktree remove "<source-worktree-path>"
+git -C "$MAIN_REPO" worktree prune
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<source-worktree-path>"
 ```
 
 ### Option 2: remove worktree + delete branch
 
-Run both commands in a **single Bash call**, chained with `&&`. `git branch -d` refuses to delete a branch still checked out in a worktree, so the worktree must be removed first. Chaining in one shell invocation means the cwd is resolved once at launch — before the worktree directory disappears — so the branch delete still runs even if the session was inside that worktree.
+`git branch -d` refuses to delete a branch still checked out in a worktree, so the worktree is removed first. `-d` is a safe delete: if it fails, the branch has commits beyond what was merged — surface that rather than force-deleting. The later lines still run, so the worktree is pruned and deregistered even when the branch is kept.
 
 ```bash
-git -C "$MAIN_REPO" worktree remove "<source-worktree-path>" && git -C "$MAIN_REPO" branch -d "<source-branch>"
-```
-
-If `git branch -d` fails, the branch has commits beyond what was merged — surface that rather than force-deleting.
-
-### Then prune and deregister
-
-```bash
+MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print substr($0, 10); exit }')
+git -C "$MAIN_REPO" worktree remove "<source-worktree-path>"
+git -C "$MAIN_REPO" branch -d "<source-branch>"
 git -C "$MAIN_REPO" worktree prune
 bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<source-worktree-path>"
 ```
