@@ -1,9 +1,9 @@
 ---
 name: distill
 description: >
-  Diagnose requirements problems and guide discovery of real needs vs. stated wants.
-  Use before any implementation to distinguish problem from solution, surface hidden
-  constraints, and bound scope to a viable V1.
+  Diagnose requirements problems; discover real needs vs. stated wants. Use before
+  implementation to separate problem from solution, surface hidden constraints, and bound
+  scope to a viable V1.
   Trigger phrases: "requirements analysis", "what should I build", "clarify requirements",
   "is this the right problem", "define scope", "what does the user need",
   "distill requirements", "/empire-product:distill".

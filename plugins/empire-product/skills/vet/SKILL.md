@@ -5,9 +5,9 @@ description: >
   "go no go", "pressure test", "is this idea good",
   "kill the idea", "should I build this", "fatal flaw check", "what do you think of this product",
   "stress test the idea", "brutal honesty on this idea". Pressure-tests a
-  product idea with brutal honesty: web research for competitors and demand,
-  fatal-flaw hypothesis, anti-sycophancy mode, structured go/no-go output with
-  pivots. Findings stay local — never posted externally.
+  product idea: web research for competitors and demand, fatal-flaw hypothesis,
+  anti-sycophancy mode, structured go/no-go output with pivots.
+  Findings stay local — never posted externally.
 ---
 
 <section id="anti-sycophancy">

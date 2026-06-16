@@ -5,11 +5,10 @@ description: >
   "/empire-product:recon", "competitor matrix", "competitor research",
   "feature gap", "scout competitors", "size up competition", "pricing
   comparison vs competitors", "positioning analysis", "competitive landscape".
-  Maps competitor pricing, features, positioning, and gaps across a chosen
-  dimension set. Produces side-by-side matrix with confidence-tagged data and
-  positioning angle. Different from `/empire-research:compare`, which
-  evaluates tools, libraries, vendors, or architectural choices — NOT
-  competitors. Findings stay local — never posted externally.
+  Maps competitor pricing, features, positioning, and gaps into a side-by-side matrix
+  with confidence-tagged data and a positioning angle. Different from
+  `/empire-research:compare`, which evaluates tools, libraries, vendors, or architectural
+  choices — NOT competitors. Findings stay local — never posted externally.
 ---
 
 <section id="purpose">
