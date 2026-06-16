@@ -20,18 +20,20 @@ IMPORTANT: Output the rendered description verbatim. Do not summarize, paraphras
 ## Voice
 
 - Senior dev writing for peers. Direct. Active voice. Imperative mood.
+- One idea per sentence. Short sentences. Lead with the point. Cut every word that adds no information; a reviewer should grasp each line in one pass.
+- No dashes as connectors in prose. Avoid the em dash (`—`), en dash (`–`), and the spaced hyphen (` - `); they read as machine written. Split into two sentences or use a comma or colon. Hyphenated words like `off-by-one` and Markdown list bullets stay fine.
 - No "this PR", "this commit", "I am", "we", filler openers.
 - Explain why and what users or callers experience differently. Cut anything obvious from the diff.
-- No emoji. No H1. No marketing tone. No "N/A" or "Risk: None".
+- No emoji. No H1. No marketing tone. No "N/A".
 - If `CONTEXT.md` exists in the repo, use its vocabulary for domain terms.
 
 ## Length
 
 | Diff size | Budget                                                    |
 | --------- | --------------------------------------------------------- |
-| ≤ 100 LOC | ≤ 80 words, drop Risk and Test plan unless non-trivial    |
+| ≤ 100 LOC | ≤ 80 words, drop Test plan unless non-trivial             |
 | ≤ 500 LOC | ≤ 200 words, include only non-empty sections              |
-| > 500 LOC | ≤ 200 words, flag size in Risk, summarize at higher level |
+| > 500 LOC | ≤ 200 words, summarize at higher level, note the size in What changed |
 
 Skip empty sections entirely.
 
@@ -49,16 +51,16 @@ Render between markers. Preserve everything outside markers when updating.
 Skip mechanical changes (renames, moves, test additions) unless they affect behavior.
 Pick the most important changes; don't enumerate everything.
 
-## Risk
-Migrations, breaking API, new env vars or deps, rollback notes, perf concerns.
-Only include if there's real risk. Prefix breaking changes with `BREAKING:`.
-
 ## Test plan
 Manual steps to verify the change locally.
 Omit for simple diffs or when the behavior is self-evident.
 Never list CI steps (lint, typecheck, unit tests, CI pipelines).
 <!-- pr-description:end -->
 ```
+
+### Extra sections
+
+Default to Why / What changed / Test plan only. Add an extra `##` section **only when the change carries something a reviewer must not miss** and no existing section fits — e.g. a breaking change, a required migration, a new env var or dependency, a rollback step, or a security-relevant note. Never add one by default or to pad a thin PR. Prefix breaking changes with `BREAKING:`.
 
 ## PR chains
 
@@ -77,6 +79,16 @@ If an existing body is provided:
 - Replace only content between `<!-- pr-description:start -->` and `<!-- pr-description:end -->`.
 - Preserve all content outside markers (screenshots, reviewer notes, `Fixes #N`, task lists, `Depends on:` lines).
 - If markers are absent: wrap new body in markers, append after author-written content.
+
+## Labels and assignee
+
+The rendered body is the only thing piped to `gh`. Labels and assignee are set with flags on the same `gh pr create`/`gh pr edit` call — never inside the body.
+
+- **Assignee** — assign the PR to the author: `--assignee @me` on create, or `gh pr edit --add-assignee @me` on an existing PR.
+- **Labels** — apply the labels that fit the change:
+  - List the repo's real labels first: `gh label list`. Map type (`feat`/`fix`/`docs`/`chore`), affected area/scope, and size (only if the repo uses size labels) to the closest existing label.
+  - Apply with `--label` on create or `gh pr edit --add-label`. If no existing label fits, apply none — do not force a wrong one.
+  - **Never create a new label** unless the repo's issue-tracker agents file (e.g. `docs/agents/issue-tracker.md`) explicitly defines the label set agents may create. Absent that file, the existing labels are the only allowed set.
 
 ## Special cases
 
