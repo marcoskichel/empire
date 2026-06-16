@@ -24,6 +24,7 @@ This file provides guidance for AI agents working with code in this repository.
 
 ## Skill authoring rules
 
+- Use `/skill-creator` if available
 - Frontmatter required: `name`, `description`. Optional: `model`, `allowed-tools`, `argument-hint`, `disable-model-invocation`.
 - `description` MUST list trigger phrases verbatim — Claude auto-route uses them.
 - Reference bundled scripts via `${CLAUDE_PLUGIN_ROOT}/scripts/<file>.sh`. Never hardcode repo paths.
@@ -32,12 +33,13 @@ This file provides guidance for AI agents working with code in this repository.
 
 ## Adding a new skill
 
-1. Pick the right plugin (`empire-git`, `empire-dev`, `empire-research`, `empire-product`, or `empire-visual`). Create a new plugin only if the skill clearly fits no existing namespace.
-2. Create `plugins/<plugin>/skills/<name>/SKILL.md` with frontmatter + body. Frontmatter `name` MUST match dir name.
-3. Add a section to the plugin's `README.md` (`plugins/<plugin>/README.md`) under `## Skills`, mirroring existing entries (description, triggers, source link). If the plugin's one-line summary in the root `README.md` table is now out of date, update it too.
-4. If shipping a script, drop it in `plugins/<plugin>/scripts/` and `chmod +x`.
-5. Bump the version in `plugins/<plugin>/.claude-plugin/plugin.json`. If the change is user-visible across multiple sub-plugins, also bump `plugins/empire-meta/.claude-plugin/plugin.json`.
-6. Test by installing the marketplace locally in Claude Code: `/plugin marketplace add <local-path-or-fork>` then `/plugin install <plugin>@empire` (or `empire@empire` for the bundle).
+1. Use `/skill-creator` if available
+2. Pick the right plugin (`empire-git`, `empire-dev`, `empire-research`, `empire-product`, or `empire-visual`). Create a new plugin only if the skill clearly fits no existing namespace.
+3. Create `plugins/<plugin>/skills/<name>/SKILL.md` with frontmatter + body. Frontmatter `name` MUST match dir name.
+4. Add a section to the plugin's `README.md` (`plugins/<plugin>/README.md`) under `## Skills`, mirroring existing entries (description, triggers, source link). If the plugin's one-line summary in the root `README.md` table is now out of date, update it too.
+5. If shipping a script, drop it in `plugins/<plugin>/scripts/` and `chmod +x`.
+6. Bump the version in `plugins/<plugin>/.claude-plugin/plugin.json`. If the change is user-visible across multiple sub-plugins, also bump `plugins/empire-meta/.claude-plugin/plugin.json`.
+7. Test by installing the marketplace locally in Claude Code: `/plugin marketplace add <local-path-or-fork>` then `/plugin install <plugin>@empire` (or `empire@empire` for the bundle).
 
 ## Conventions
 
