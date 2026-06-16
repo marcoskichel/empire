@@ -1,22 +1,21 @@
 ---
 name: shape
 description: >
-  Diagnose system design problems and guide architecture decisions — prevents
-  over-engineering and under-engineering, surfaces missing integration points,
-  and drives toward a walking skeleton before full build-out.
-  Use when designing a system, when architecture feels either too complex or
-  too vague, or when integration points are unclear.
-  Trigger phrases: "system design", "how should I structure this", "too much abstraction",
+  Diagnose system design problems and guide architecture decisions — catches
+  over- and under-engineering, surfaces missing integration points, drives
+  toward a walking skeleton before full build-out. Use when designing a
+  system, when architecture feels too complex or too vague, or when
+  integration points are unclear. Findings stay local. Trigger phrases:
+  "system design", "how should I structure this", "too much abstraction",
   "under-engineered", "where do I start building", "design this system",
   "walking skeleton", "/empire-dev:shape".
-  Findings stay local — never post to GitHub.
 ---
 
 <section id="core">
 
 **Design emerges from constraints.** Every architectural decision is a trade-off against something else. Make trade-offs explicit before they become bugs.
 
-MUST NOT proceed with design until requirements exist. If requirements are unclear, use `/empire-dev:distill` first.
+MUST NOT proceed with design until requirements exist — architecture serves requirements, so designing without them optimizes for the wrong target. If requirements are unclear, use `/empire-dev:distill` first.
 
 </section>
 
@@ -103,7 +102,7 @@ If neither exists, proceed without them. Do not create these files unprompted.
 1. Read `CONTEXT.md` and relevant ADRs in `docs/adr/` if present — use domain vocabulary throughout
 2. Confirm requirements exist — if not, redirect to `/empire-dev:distill`
 3. Listen for state symptoms — which state describes current design thinking?
-4. Start at the earliest problem state — MUST NOT skip ahead
+4. Start at the earliest problem state — MUST NOT skip ahead; earlier states gate later ones, and an unaddressed foundation resurfaces downstream
 5. Ask key questions for that state
 6. Apply interventions — work through exercises
 7. Produce artifacts — document decisions that matter

@@ -1,14 +1,13 @@
 ---
 name: weigh
 description: >
-  Systematically evaluate architecture decisions, document trade-offs, and select
-  appropriate patterns for context. Use when making technology choices, evaluating
-  architectural patterns, creating Architecture Decision Records, assessing technical
-  debt, or comparing design alternatives.
-  Trigger phrases: "architecture decision", "ADR", "which pattern should I use",
+  Evaluate architecture decisions, document trade-offs, select patterns for
+  context. Use when making technology choices, evaluating architectural
+  patterns, writing Architecture Decision Records (ADRs), assessing technical
+  debt, or comparing design alternatives. Findings stay local. Trigger
+  phrases: "architecture decision", "ADR", "which pattern should I use",
   "evaluate trade-offs", "technology choice", "design pattern selection",
   "weigh the options", "/empire-dev:weigh".
-  Findings stay local — never post to GitHub.
 ---
 
 <section id="core">
@@ -82,61 +81,7 @@ Use ADR for any decision that would be expensive to reverse.
 
 Write to `docs/adr/NNNN-<slug>.md` — NNNN = next available number zero-padded to 4 digits; slug = lowercase-hyphenated title. Create `docs/adr/` if absent.
 
-```markdown
----
-adr: NNNN
-title: <title>
-date: YYYY-MM-DD
-status: proposed
-supersedes: null
-tags: []
-modules: []
----
-
-# ADR-NNNN: <TITLE>
-
-## Status
-
-[Proposed | Accepted | Deprecated | Superseded by ADR-MMMM]
-
-## Context
-
-[Situation requiring a decision]
-
-### Requirements
-
-- [Requirement]
-
-### Constraints
-
-- [Constraint]
-
-## Decision
-
-[What is the decision?]
-
-### Justification
-
-- [Reason]
-
-## Consequences
-
-### Positive
-
-- [Benefit]
-
-### Negative
-
-- [Drawback]
-
-## Alternatives Considered
-
-### [Alternative]
-
-Reason rejected: [Why]
-```
-
-Update frontmatter `status` when the decision changes state. To supersede: set `status: superseded-by ADR-MMMM` in the old ADR; reference the old one in the new ADR's `supersedes` field.
+For the full ADR template (frontmatter + sections) and supersede mechanics, read `references/adr-template.md`.
 
 </section>
 

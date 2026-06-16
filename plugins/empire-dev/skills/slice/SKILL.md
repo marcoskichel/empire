@@ -1,14 +1,13 @@
 ---
 name: slice
 description: >
-  Transform overwhelming development tasks into manageable units — diagnoses why
-  tasks fail to complete and applies decomposition patterns to create right-sized,
-  independently deliverable work.
-  Use when a task feels too big to estimate, when unsure where to start, when blocked
-  by dependencies, or when scope keeps growing.
-  Trigger phrases: "task too big", "can't estimate", "overwhelmed by scope",
-  "where do I start", "break this down", "epic needs breakdown",
-  "slice this up", "/empire-dev:slice".
+  Break overwhelming development tasks into right-sized, independently
+  deliverable units — diagnoses why tasks stall and applies decomposition
+  patterns. Use when a task feels too big to estimate, when unsure where to
+  start, when blocked by dependencies, or when scope keeps growing. Trigger
+  phrases: "task too big", "can't estimate", "overwhelmed by scope", "where do
+  I start", "break this down", "epic needs breakdown", "slice this up",
+  "/empire-dev:slice".
 ---
 
 <section id="core">
