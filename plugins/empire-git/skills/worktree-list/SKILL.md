@@ -79,10 +79,10 @@ Compare the commit timestamp to now. Flag as **stale** if the last commit is **3
 ### Port offset
 
 ```bash
-printf '%s' "<path>" | cksum | awk '{print $1 % 100}'
+printf '%s' "<absolute-worktree-path>" | cksum | awk '{print $1 % 100}'
 ```
 
-`worktree-setup.sh` derives each worktree's port offset from its path with this exact formula, so recomputing it here is free and deterministic. Show it in the listing and use it to flag the collisions in Step 4.
+`worktree-setup.sh` derives the offset from the worktree's absolute path with this exact formula. Feed the raw absolute path straight from the `worktree <path>` porcelain line (Step 1), not the shortened relative path shown in the Step 3 examples, and don't run it through `realpath` or append a trailing slash. Any difference in the string changes the cksum and yields a wrong offset; match it exactly and the recompute is deterministic. Show it in the listing and use it for the collision check in Step 4.
 
 ## Step 3 — Format the output
 
