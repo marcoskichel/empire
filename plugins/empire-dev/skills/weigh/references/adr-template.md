@@ -1,6 +1,6 @@
 # ADR template
 
-Write to `docs/adr/NNNN-<slug>.md` — NNNN = next available number zero-padded to 4 digits; slug = lowercase-hyphenated title. Create `docs/adr/` if absent.
+Template for the `docs/adr/NNNN-<slug>.md` file (numbering and placement rules live in the `weigh` SKILL).
 
 ```markdown
 ---
