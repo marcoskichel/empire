@@ -1,11 +1,11 @@
 ---
 name: dissect
 description: >
-  Systematically investigate complex claims by decomposing them into atomic
-  verifiable components, resolving vague entities, verifying each component
-  independently, and separating confirmed facts from narrative interpretation.
-  Use when fact-checking complex claims, investigating narratives that mix facts
-  with interpretation, or when a claim bundles multiple assertions.
+  Investigate complex claims: decompose into atomic verifiable components,
+  resolve vague entities, verify each independently, separate confirmed facts
+  from narrative interpretation. Use to fact-check complex claims, investigate
+  narratives mixing fact with interpretation, or when a claim bundles multiple
+  assertions.
   Trigger phrases: "investigate this claim", "fact-check this", "is this true",
   "decompose this narrative", "viral content check", "trace this claim",
   "/empire-research:dissect".

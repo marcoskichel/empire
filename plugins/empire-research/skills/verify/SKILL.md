@@ -1,11 +1,11 @@
 ---
 name: verify
 description: >
-  Run a systematic verification pass on generated content to catch hallucinations,
-  confabulations, and unsupported assertions. MUST be a separate pass — cannot be
-  reliably combined with content generation in the same pass.
-  Use after research synthesis, after content generation, or whenever accuracy
-  of claims matters before delivery.
+  Systematic verification pass on generated content — catch hallucinations,
+  confabulations, unsupported assertions. MUST be a separate pass from
+  generation; cannot reliably self-check in one pass. Use after research
+  synthesis or content generation, or whenever claim accuracy matters before
+  delivery.
   Trigger phrases: "fact-check this", "verify these claims", "check for hallucinations",
   "second pass on accuracy", "verify the output", "is this accurate",
   "/empire-research:verify".
