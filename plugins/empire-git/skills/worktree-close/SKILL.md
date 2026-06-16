@@ -1,14 +1,13 @@
 ---
 name: worktree-close
 description: >
-  Finish work in a SINGLE worktree — push, remove the worktree, and optionally
-  delete the branch. Use this when the user is done with a specific worktree,
-  wants to wrap one up, push and move on, or no longer needs a parallel
-  environment. Triggers on phrases like "close this worktree", "I'm done with
-  this worktree", "wrap up this branch", "push and remove", "tear down this
-  worktree". For batch cleanup of MULTIPLE stale worktrees, use
-  worktree-cleanup instead. Also triggers for `/empire-git:worktree-close
-  [branch] [--push] [--discard] [--force]`.
+  Finish work in a SINGLE worktree: push, remove the worktree, optionally
+  delete the branch. Use when done with a specific worktree, wrapping one up,
+  pushing and moving on, or no longer needing a parallel environment. Triggers
+  on "close this worktree", "I'm done with this worktree", "wrap up this
+  branch", "push and remove", "tear down this worktree". For batch cleanup of
+  MULTIPLE stale worktrees, use worktree-cleanup instead. Also triggers for
+  `/empire-git:worktree-close [branch] [--push] [--discard] [--force]`.
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[branch | path] [--push] [--discard] [--force]"
@@ -96,37 +95,30 @@ If `--force` was specified, skip the cleanup-option prompt and use option 2 (but
 
 ## Step 5 — Execute the chosen action
 
+Run the chosen option (1 or 2) as a **single Bash call**. Claude Code's Bash tool resolves the shell's cwd once at the start of each invocation and does not carry shell variables between invocations. If the session is inside the worktree, removing it makes the cwd vanish — so any _separate_ later Bash call (prune, registry update, even `git -C`) fails before it starts, and `MAIN_REPO` would be empty besides. Keeping remove, branch delete, prune, and deregister in one call sidesteps both problems: cwd is read once before anything is deleted, and every git command is anchored to the main working tree with `git -C "$MAIN_REPO"`. `awk` uses `substr($0, 10)` rather than `$2` so worktree paths containing spaces are not truncated.
+
 ### Option 1: Remove worktree only
 
 ```bash
-git worktree remove "<worktree-path>"
+MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print substr($0, 10); exit }')
+git -C "$MAIN_REPO" worktree remove "<worktree-path>"
+git -C "$MAIN_REPO" worktree prune
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<worktree-path>"
 ```
 
-If the worktree is dirty and the user confirmed discard (or passed `--discard`):
-
-```bash
-git worktree remove --force "<worktree-path>"
-```
+If the worktree is dirty and the user confirmed discard (or passed `--discard`), swap the remove for `git -C "$MAIN_REPO" worktree remove --force "<worktree-path>"`.
 
 ### Option 2: Remove worktree + delete branch
 
-**Critical: both commands MUST run in a single Bash call.** Claude Code's Bash tool resolves the shell's cwd at the start of each invocation. If the session is running from inside the worktree and you remove the worktree in one Bash call, the _next_ Bash call will fail immediately ("No such file or directory") before any command — including `git -C` — can execute. The branch delete becomes impossible and the branch is orphaned.
-
-The worktree must be removed before the branch delete (`git branch -d` refuses to delete a branch that's checked out in a worktree). So the correct sequence is: remove worktree, then delete branch — but **in one shell invocation**.
-
-First, resolve the main working tree path:
+`git branch -d` refuses to delete a branch still checked out in a worktree, so the worktree is removed first. `-d` is a safe delete; if it fails, the branch has unmerged commits — keep it and surface the message below rather than force-deleting. The later lines still run, so the worktree is pruned and deregistered even when the branch is kept.
 
 ```bash
-MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print $2; exit }')
+MAIN_REPO=$(git worktree list --porcelain | awk '/^worktree / { print substr($0, 10); exit }')
+git -C "$MAIN_REPO" worktree remove "<worktree-path>"
+git -C "$MAIN_REPO" branch -d "<branch>"
+git -C "$MAIN_REPO" worktree prune
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<worktree-path>"
 ```
-
-Then run both commands in a **single Bash call**, chained with `&&`:
-
-```bash
-git -C "$MAIN_REPO" worktree remove "<worktree-path>" && git -C "$MAIN_REPO" branch -d "<branch>"
-```
-
-**Why this works:** the shell resolves its cwd once when the Bash call starts. Both `git` commands use `-C "$MAIN_REPO"` so git operates from the main repo regardless of the shell's cwd. Since they run in the same shell process, the cwd is only checked once — at launch — before any directory is removed.
 
 If `git branch -d` fails (branch not fully merged), tell the user:
 
@@ -136,19 +128,9 @@ If `git branch -d` fails (branch not fully merged), tell the user:
 
 Do nothing. Confirm to the user that the worktree is still active.
 
-## Step 6 — Prune, deregister, and confirm
+## Step 6 — Confirm
 
-```bash
-git worktree prune
-```
-
-Then remove the entry from the session registry (idempotent — no-op if absent):
-
-```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/worktree-registry.sh" remove "<worktree-path>"
-```
-
-If the registry call fails, print a warning and continue — the worktree removal already succeeded.
+For options 1 and 2 the prune and registry deregister already ran inside the Step 5 call (the registry remove is idempotent — a no-op if the entry is absent). If either printed a warning, mention it but continue; the worktree removal already succeeded. Option 3 removed nothing, so there is nothing to confirm beyond the worktree staying active.
 
 Print a summary:
 

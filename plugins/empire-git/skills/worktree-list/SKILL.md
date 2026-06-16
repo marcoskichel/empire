@@ -1,13 +1,13 @@
 ---
 name: worktree-list
 description: >
-  Read-only inventory of active worktrees with branch, status, sync state, and
-  staleness info. Use this when the user asks what worktrees exist, "list
-  worktrees", "show my worktrees", "what's in flight", "which branches have
-  worktrees", "stale worktrees", "any forgotten worktrees", or wants a
-  parallel-work overview. Reports state only — never deletes or modifies. For
-  removal use worktree-close (single) or worktree-cleanup (batch). Also
-  triggers for `/empire-git:worktree-list [--stale]`.
+  Read-only inventory of active worktrees: branch, status, sync state,
+  staleness. Use when user asks what worktrees exist, "list worktrees", "show
+  my worktrees", "what's in flight", "which branches have worktrees", "stale
+  worktrees", "any forgotten worktrees", or wants a parallel-work overview.
+  Reports state only, never deletes or modifies. For removal use worktree-close
+  (single) or worktree-cleanup (batch). Also triggers for
+  `/empire-git:worktree-list [--stale]`.
 model: haiku
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[--stale]"
@@ -75,6 +75,14 @@ git -C "<path>" log -1 --format="%ct" 2>/dev/null
 ```
 
 Compare the commit timestamp to now. Flag as **stale** if the last commit is **3 or more days old**. This is the informational threshold; `worktree-cleanup` uses a stricter 7-day threshold for actual removal. The two thresholds differ on purpose: list is a soft warning, cleanup is the action.
+
+### Port offset
+
+```bash
+printf '%s' "<absolute-worktree-path>" | cksum | awk '{print $1 % 100}'
+```
+
+`worktree-setup.sh` derives the offset from the worktree's absolute path with this exact formula. Feed the raw absolute path straight from the `worktree <path>` porcelain line (Step 1), not the shortened relative path shown in the Step 3 examples, and don't run it through `realpath` or append a trailing slash. Any difference in the string changes the cksum and yields a wrong offset; match it exactly and the recompute is deterministic. Show it in the listing and use it for the collision check in Step 4.
 
 ## Step 3 — Format the output
 

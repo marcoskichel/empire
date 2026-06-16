@@ -1,9 +1,9 @@
 ---
 name: worktree-help
 description: >
-  Answer questions about the worktree toolkit — VSCode integration, gitignore,
-  port offsets, env files, dependency installs, workflow tips. Use when the
-  user asks how worktrees work, "how do I open this in VSCode", "why is .env
+  Answer questions about the worktree toolkit: VSCode integration, gitignore,
+  port offsets, env files, dependency installs, workflow tips. Use when user
+  asks how worktrees work, "how do I open this in VSCode", "why is .env
   copied", "what about port collisions", "how do worktrees affect main repo",
   "worktree workflow", "show me the worktree FAQ", or any question about the
   setup. Also triggers for `/empire-git:worktree-help [question]`.

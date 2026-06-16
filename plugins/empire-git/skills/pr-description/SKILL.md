@@ -1,15 +1,15 @@
 ---
 name: pr-description
 description: >
-  Render the canonical PR description body. Use whenever drafting, writing,
-  updating, refreshing, or regenerating a "PR description", "PR body", "pull
-  request description", "pull request body", "PR summary", "PR template",
-  "GitHub PR body", or any text destined for `gh pr create --body`, `gh pr
-  create --body-file`, `gh pr edit --body`, `gh pr edit --body-file`, or a
-  GitHub PR template. Triggers on phrases like "draft a PR", "write the PR",
-  "summarize this branch for review", "regenerate PR body". MUST be invoked
-  before any `gh pr create --body*` or `gh pr edit --body*` per the empire-git
-  rules. Output is markdown ready to pipe to stdin.
+  Render the canonical PR description body. Use when drafting, writing,
+  updating, or regenerating a "PR description", "PR body", "pull request
+  description", "pull request body", "PR summary", "PR template", "GitHub PR
+  body", or any text bound for `gh pr create --body`, `gh pr create
+  --body-file`, `gh pr edit --body`, `gh pr edit --body-file`, or a GitHub PR
+  template. Triggers on "draft a PR", "write the PR", "summarize this branch
+  for review", "regenerate PR body". MUST be invoked before any `gh pr create
+  --body*` or `gh pr edit --body*` per empire-git rules. Outputs markdown for
+  stdin.
 allowed-tools: Bash Read Glob Grep
 ---
 

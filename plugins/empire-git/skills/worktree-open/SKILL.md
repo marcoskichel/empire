@@ -1,8 +1,8 @@
 ---
 name: worktree-open
 description: >
-  Create or reopen a git worktree for parallel development. Use whenever the
-  user wants to "open a worktree", "spin up a branch", "work on X separately",
+  Create or reopen a git worktree for parallel development. Use when user
+  wants to "open a worktree", "spin up a branch", "work on X separately",
   "work on this in parallel", "start a parallel task", "isolated environment
   for an agent", "side branch without switching", or mentions worktrees,
   parallel branches, or stacked work. Also triggers for
