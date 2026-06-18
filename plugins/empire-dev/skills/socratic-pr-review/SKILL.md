@@ -27,12 +27,12 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
   - Explicit PR number or URL in the invocation
   - Open PR for the current branch: `gh pr view --json number,url,headRefOid`
   - PR referenced earlier in conversation
-- MUST state the resolved PR (number + url) before dispatch.
 - No open PR + no explicit target → ASK; do not guess.
-- Capture once for later API calls:
-  - `OWNER=$(gh repo view --json owner -q .owner.login)`
-  - `REPO=$(gh repo view --json name -q .name)`
-  - `PR=<number>`; `SHA=$(gh pr view "$PR" --json headRefOid -q .headRefOid)`
+- Derive `OWNER`/`REPO` from the PR's OWN base repo, never from `gh repo view` (the cwd repo may differ from the PR's repo or fork):
+  - `gh pr view "$PR" --json number,url,baseRefName,headRefOid` (a bare number resolves against cwd; pass a full URL for any other repo or fork)
+  - Parse `OWNER`/`REPO` from the returned `.url` (`https://github.com/OWNER/REPO/pull/N`); set `PR` from `.number`
+- MUST echo `OWNER/REPO#PR @ <sha>` + url and confirm it is the intended PR before team-review or any post. A wrong target is unrecoverable once posted.
+- Treat `SHA` as provisional here; re-fetch it immediately before posting (see [post-review](#post-review)).
 
 </section>
 
@@ -50,7 +50,7 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
 - Convert each Recommended action into one draft inline comment.
 - Anchor every comment to `path` + `line` from the diff:
   - Added or context line → `side: RIGHT`
-  - Deleted line → `side: LEFT`
+  - Deleted line → `side: LEFT`, only when that line sits inside a displayed diff hunk; else fold into the summary body
   - Span → `start_line` + `line` (same side)
 - Inline comments MUST land on lines present in the PR diff. Finding outside the diff → fold into the summary body, never invent a line.
 - Drop Single-source low-confidence findings unless the lone specialist owns that category (per team-review tiering). Do not auto-include nits.
@@ -72,7 +72,7 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
 
 <section id="recheck">
 
-- Before proposing ANY comment, re-verify it against the current code.
+- Re-verify EVERY draft comment against the current code in one batch pass, BEFORE the one-by-one validation loop.
 - Read the actual file and line; confirm the issue still exists in the diff as drafted.
 - MAY use WebSearch / WebFetch to confirm API behavior, version semantics, or library contracts the finding depends on.
 - Drop the comment if re-check shows it is wrong, already handled, or off-target. State dropped ones briefly.
@@ -111,6 +111,7 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
   - `COMMENT` — questions worth raising, no blocking stance
 - Propose a summary body (MAY be empty). Keep it short; same prose rules (no dashes, no emojis).
 - Present verdict + summary; MUST get explicit user approval of both before posting.
+- `REQUEST_CHANGES` blocks the PR; MUST confirm the blocking event explicitly, separate from summary approval.
 - User MAY override the event and edit the summary.
 
 </section>
@@ -118,10 +119,16 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
 <section id="post-review">
 
 - Post the ENTIRE review in ONE GitHub API call. Never post comments individually; never create a pending review then submit separately.
-- Build the payload, then a single POST:
+- Immediately before posting:
+  - Re-fetch `SHA=$(gh pr view "$PR" --json headRefOid -q .headRefOid)`. If it changed since [target-detection](#target-detection), warn the user and re-confirm (anchors may have drifted).
+  - Re-display the exact destination + action — `OWNER/REPO#PR @ $SHA`, event — and get a final explicit "post" confirmation. The per-comment gate does not cover the destination.
+- Build the payload with `jq` into a temp file; pass every comment `body` and the summary as `--arg` values, NEVER via string interpolation (bodies hold quotes, backticks, `$()`). Then a single POST, deleting the temp file after:
 
   ```bash
-  gh api --method POST "repos/$OWNER/$REPO/pulls/$PR/reviews" --input payload.json
+  payload=$(mktemp)
+  # jq -n --arg body "$SUMMARY" --argjson comments "$COMMENTS_JSON" ... > "$payload"
+  gh api --method POST "repos/$OWNER/$REPO/pulls/$PR/reviews" --input "$payload"
+  rm -f "$payload"
   ```
 
 - `payload.json` shape:
@@ -145,9 +152,9 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
   }
   ```
 
-- `COMMENT` and `REQUEST_CHANGES` require a non-empty `body` when `comments` is empty; `APPROVE` MAY have empty `body`.
+- With `comments` present, any event MAY omit `body`; with no `comments`, `COMMENT` and `REQUEST_CHANGES` require a non-empty `body` (`APPROVE` MAY always be empty).
 - After posting, report the review URL from the API response.
-- On API error (line not in diff, stale `SHA`): re-resolve the anchor or `SHA`, then retry the single call. Never split into multiple posts.
+- On API error (line not in diff, stale `SHA`): re-resolve the anchor or `SHA` and retry the single call, max 2 retries. If a retry changes an anchor the user validated, re-confirm that comment first. Never split into multiple posts; surface to the user after repeated failure.
 
 </section>
 

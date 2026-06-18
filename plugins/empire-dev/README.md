@@ -41,7 +41,7 @@ flowchart LR
 
 Review a PR in the Socratic style: lead the author to each defect with a question instead of dictating the fix. Runs `team-review` on the PR, converts its recommended actions into short question-style inline comments, re-checks every comment against the current code (with optional web research), then walks them past you one at a time to keep, adjust, or drop. After validation it proposes a verdict (approve / request changes / comment) plus an optional summary, and on your approval posts the entire review in a single GitHub API call. This is the one empire-dev skill that writes to GitHub, and only after you validate every comment and the verdict. Comments stay short (ideally under 150 chars), omit fix suggestions unless unambiguous, and use no dashes or emojis.
 
-**Triggers:** "socratic review", "socratic pr review", "socratic code review", "review this PR socratically", "review the PR with questions", "ask questions on the PR", "/empire-dev:socratic-pr-review".
+**Triggers:** "socratic review", "socratic pr review", "socratic code review", "review this PR socratically", "review the PR with questions", "ask questions on the PR", "question-style review", "leave socratic comments", "/empire-dev:socratic-pr-review".
 
 ```mermaid
 flowchart LR
