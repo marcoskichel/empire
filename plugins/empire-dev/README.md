@@ -37,6 +37,24 @@ flowchart LR
 
 **Source:** [`skills/team-review/SKILL.md`](skills/team-review/SKILL.md)
 
+### `socratic-pr-review`
+
+Review a PR in the Socratic style: lead the author to each defect with a question instead of dictating the fix. Runs `team-review` on the PR, converts its recommended actions into short question-style inline comments, re-checks every comment against the current code (with optional web research), then walks them past you one at a time to keep, adjust, or drop. After validation it proposes a verdict (approve / request changes / comment) plus an optional summary, and on your approval posts the entire review in a single GitHub API call. This is the one empire-dev skill that writes to GitHub, and only after you validate every comment and the verdict. Comments stay short (ideally under 150 chars), omit fix suggestions unless unambiguous, and use no dashes or emojis.
+
+**Triggers:** "socratic review", "socratic pr review", "socratic code review", "review this PR socratically", "review the PR with questions", "ask questions on the PR", "/empire-dev:socratic-pr-review".
+
+```mermaid
+flowchart LR
+  pr[PR] --> tr[team-review]
+  tr --> draft[Draft questions]
+  draft --> recheck[Re-check vs code]
+  recheck --> validate[Validate 1 by 1]
+  validate --> verdict[Verdict + summary]
+  verdict --> post[Post one review]
+```
+
+**Source:** [`skills/socratic-pr-review/SKILL.md`](skills/socratic-pr-review/SKILL.md)
+
 ### `handoff`
 
 Autonomously drive one task from intent to a labelled PR with green CI. Chains the workflow end-to-end: open a worktree, plan (via `superpowers:writing-plans` when a spec exists), implement, run `team-review`, auto-apply consensus fixes while flagging low-confidence/conflicting/behaviour-changing ones, open the PR (body via `pr-description`), watch CI in a bounded fix loop, and assign labels from the repo's actual label set. Invoking the skill is the ship-intent signal — it authorizes push and PR creation without per-step confirmation — but it hard-stops on ambiguous requirements, destructive/irreversible actions, security calls, scope explosions, and external side effects. Judgment calls are flagged for human review in a "Decisions & flags" PR section and the final chat report rather than guessed silently.
