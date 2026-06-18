@@ -126,7 +126,13 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
 
   ```bash
   payload=$(mktemp)
-  # jq -n --arg body "$SUMMARY" --argjson comments "$COMMENTS_JSON" ... > "$payload"
+  # Append each comment as data, never interpolated into the JSON:
+  comments='[]'
+  comments=$(jq -c --arg path "$P" --argjson line "$N" --arg side RIGHT --arg body "$Q" \
+    '. + [{path: $path, line: $line, side: $side, body: $body}]' <<<"$comments")
+  # repeat per comment; for a span add --argjson start_line and --arg start_side
+  jq -n --arg commit "$SHA" --arg event "$EVENT" --arg body "$SUMMARY" --argjson comments "$comments" \
+    '{commit_id: $commit, event: $event, body: $body, comments: $comments}' >"$payload"
   gh api --method POST "repos/$OWNER/$REPO/pulls/$PR/reviews" --input "$payload"
   rm -f "$payload"
   ```
