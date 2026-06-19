@@ -1,6 +1,6 @@
 {
   "name": "empire-dev",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Development collaboration: autonomous task-to-PR driver (handoff), parallel specialist code review (team-review), socratic PR review (socratic-pr-review), plus pre-implementation diagnostics — cognitive audit (probe), requirements (distill), system design (shape), architecture decisions (weigh), task decomposition (slice) — and 11 bundled dev subagents.",
   "dependencies": ["empire-rules"],
   "author": {

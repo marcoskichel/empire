@@ -60,13 +60,18 @@ This is the one empire-dev skill that writes to GitHub. It posts exactly ONE rev
 
 <section id="socratic-style">
 
-- Phrase each comment as one genuine question that points at the defect and lets the author reach the fix.
-- Ask about the gap, not the symptom: "What happens here when `items` is empty?" not "This crashes on empty input."
+- Phrase each comment as the question a curious teammate would ask reading the diff.
+- Lead with genuine curiosity, not a gotcha. Seek to understand the change, not corner the author.
+- Sound natural and conversational. Plain words, thinking out loud. Drop stiff phrasing like "Is `X` guaranteed to be non-null".
+- When there's a clear set of answers, name them in the question: "Do `permissions` / `harness-support` replace `allowed-tools` / `compatibility`, or coexist?"
+- Two shapes, both valid:
+  - Understand intent: "What are the `permissions` values?", "Why drop the retry here?"
+  - Surface a gap: "What happens when `items` is empty?" not "This crashes on empty input."
 - Assume competence; no rhetorical or leading-to-humiliate questions.
 - One question per comment. No stacked questions.
 - Example transforms:
-  - Assertion "Missing null check on `user`" → "Is `user` guaranteed non-null at this point?"
-  - Assertion "This N+1 query is slow" → "How many queries does this loop issue per request?"
+  - "Missing null check on `user`" → "Is `user` ever null by the time we reach this?"
+  - "This N+1 query is slow" → "How many queries does this loop fire per request?"
 
 </section>
 
