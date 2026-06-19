@@ -16,15 +16,15 @@ const APPROACH_SCHEMA = {
     pros: { type: "array", items: { type: "string" } },
     cons: { type: "array", items: { type: "string" } },
     evidence: { type: "array", items: { type: "string" } },
-    fit: { enum: ["high", "medium", "low"] },
+    fit: { type: "string", enum: ["high", "medium", "low"] },
     fitRationale: { type: "string" },
   },
 };
 
-const problem = (args && args.problem) || "";
-const approaches = (args && args.approaches) || [];
-const constraints = (args && args.constraints) || "";
-const successCriteria = (args && args.successCriteria) || "";
+const problem = args?.problem ?? "";
+const approaches = args?.approaches ?? [];
+const constraints = args?.constraints ?? "";
+const successCriteria = args?.successCriteria ?? "";
 
 if (!problem || approaches.length === 0) {
   return {

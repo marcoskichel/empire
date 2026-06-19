@@ -15,6 +15,7 @@ const OPTION_SCHEMA = {
     summary: { type: "string" },
     scores: {
       type: "array",
+      minItems: 1,
       items: {
         type: "object",
         required: ["dimension", "score", "confidence"],
@@ -22,7 +23,7 @@ const OPTION_SCHEMA = {
           dimension: { type: "string" },
           score: { type: "integer", minimum: 1, maximum: 5 },
           evidence: { type: "string" },
-          confidence: { enum: ["Confirmed", "Estimated", "Inferred"] },
+          confidence: { type: "string", enum: ["Confirmed", "Estimated", "Inferred"] },
         },
       },
     },
@@ -32,10 +33,10 @@ const OPTION_SCHEMA = {
   },
 };
 
-const options = (args && args.options) || [];
-const dimensions = (args && args.dimensions) || [];
-const useCase = (args && args.useCase) || "";
-const constraints = (args && args.constraints) || "";
+const options = args?.options ?? [];
+const dimensions = args?.dimensions ?? [];
+const useCase = args?.useCase ?? "";
+const constraints = args?.constraints ?? "";
 
 if (options.length < 2 || dimensions.length === 0) {
   return {
@@ -56,7 +57,9 @@ const SCORE_PROMPT = (o) =>
   (constraints ? "## Constraints\n" + constraints + "\n\n" : "") +
   "## Option\n**" +
   o.name +
-  "**\n\n" +
+  "**" +
+  (o.description ? " — " + o.description : "") +
+  "\n\n" +
   "## Dimensions\n" +
   dimList +
   "\n\n" +
@@ -87,7 +90,7 @@ log("Scoring done: " + optionResults.length + "/" + options.length + " scored");
 
 return {
   useCase,
-  dimensions: dimensions.map((d) => d.name),
+  dimensions,
   options: optionResults,
   stats: { requested: options.length, scored: optionResults.length },
 };
