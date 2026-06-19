@@ -73,8 +73,31 @@ description: >
 
 </section>
 
+<section id="dispatch-mode">
+
+- After approaches selected, dispatch the deep research one of two ways
+- Preferred — Workflow tool available:
+
+  - Invoke the bundled deep-dive workflow; it fans out one researcher per approach with structured pros/cons/fit:
+
+    ```
+    Workflow({
+      scriptPath: "${CLAUDE_PLUGIN_ROOT}/workflows/explore-deepdive.js",
+      args: { problem, constraints, successCriteria, approaches: [{ name, description }] },
+    })
+    ```
+
+  - Surface the workflow's `log()` lines as progress
+  - Feed the returned `approaches[]` into `consolidated-report`
+  - Skip `agent-selection` and `parallel-deep-dispatch` — the workflow owns dispatch
+
+- Fallback — Workflow tool unavailable: use `agent-selection` then `parallel-deep-dispatch` below
+
+</section>
+
 <section id="agent-selection">
 
+- Fallback path — only when the Workflow tool is unavailable (see `dispatch-mode`)
 - Pick one deep agent per selected approach
 - Agent names vary by environment; do not assume a specific agent exists
 - Inspect available subagents via the `Agent` tool's `subagent_type` parameter
@@ -145,7 +168,7 @@ description: >
 - MUST gather and confirm problem context before any agent dispatch
 - MUST clarify ambiguity before shallow scan
 - MUST confirm shallow results with user before deep dispatch
-- MUST dispatch deep agents in parallel (single message, multiple tool uses)
+- MUST dispatch deep research via the `explore-deepdive` workflow when the Workflow tool is available; else dispatch deep agents in parallel (single message, multiple tool uses)
 - MUST keep all findings local in chat only
 - MUST NOT post to Slack, GitHub, Jira, or any external system unless user explicitly authorizes
 - MUST NOT implement chosen approach — recommendation only
