@@ -150,6 +150,7 @@ description: >
 <section id="consolidated-report">
 
 - After all deep agents return, produce consolidated report
+- If the workflow returns `stats.researched < stats.requested`, MUST name the approaches that failed and ask whether to re-run them before presenting
 - Comparison table:
   ```
   | Approach | Pros | Cons | Fit |

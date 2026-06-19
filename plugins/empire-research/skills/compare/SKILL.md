@@ -56,7 +56,7 @@ User can add, remove, or reweight dimensions before dispatch.
     ```
     Workflow({
       scriptPath: "${CLAUDE_PLUGIN_ROOT}/workflows/compare-score.js",
-      args: { useCase, constraints, dimensions: [{ name, description }], options: [{ name }] },
+      args: { useCase, constraints, dimensions: [{ name, description }], options: [{ name, description }] },
     })
     ```
 
@@ -124,6 +124,7 @@ User can add, remove, or reweight dimensions before dispatch.
 <section id="consolidated-matrix">
 
 - After all option-agents return, produce side-by-side matrix
+- If the workflow returns `stats.scored < stats.requested`, MUST name the options that failed and ask whether to re-run them before showing the matrix
 - Required output structure:
 
   ```
