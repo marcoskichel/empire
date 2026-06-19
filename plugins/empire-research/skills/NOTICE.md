@@ -10,7 +10,6 @@ diagnostic content and intent are preserved.
 
 ### From [jwynia/agent-skills](https://github.com/jwynia/agent-skills) — MIT, © Jerry Wynia
 
-- `verify/SKILL.md` — adapted from `skills/general/research/verification/fact-check/SKILL.md`. Renamed `fact-check` → `verify`.
 - `dissect/SKILL.md` — adapted from `skills/general/research/verification/claim-investigation/SKILL.md`. Renamed `claim-investigation` → `dissect`.
 
 ## Greenfield (no upstream)
@@ -24,5 +23,5 @@ diagnostic content and intent are preserved.
 - Rewrote frontmatter: dropped `license`, `metadata` fields; expanded `description` to list trigger phrases verbatim.
 - Rewrote prose voice: imperative mood, MUST/SHOULD/MAY, fragments, `<section>` tags.
 - Dropped jwynia-specific sections: `Output Persistence`, `Reasoning Requirements`, `Context Management`, `Feedback Loop`, references to `context-network` and `references/*` paths.
-- Rewrote cross-skill references to point at empire skills (`verify` ↔ `dissect`).
+- Rewrote cross-skill references to point at empire skills.
 - Claim categories, hallucination patterns, decomposition phases, source priority, and anti-patterns preserved.
