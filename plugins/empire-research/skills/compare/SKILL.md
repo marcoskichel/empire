@@ -46,8 +46,31 @@ User can add, remove, or reweight dimensions before dispatch.
 
 </section>
 
+<section id="dispatch-mode">
+
+- After the option list and dimensions are confirmed, dispatch scoring one of two ways
+- Preferred — Workflow tool available:
+
+  - Invoke the bundled scoring workflow; it scores each option in isolation (blind to rivals) with structured per-dimension output:
+
+    ```
+    Workflow({
+      scriptPath: "${CLAUDE_PLUGIN_ROOT}/workflows/compare-score.js",
+      args: { useCase, constraints, dimensions: [{ name, description }], options: [{ name, description }] },
+    })
+    ```
+
+  - Surface the workflow's `log()` lines as progress
+  - Feed the returned `options[]` into `consolidated-matrix`; apply dimension weights in the skill so the user can reweight without re-running
+  - Skip `agent-selection` and `parallel-dispatch` — the workflow owns dispatch
+
+- Fallback — Workflow tool unavailable: use `agent-selection` then `parallel-dispatch` below
+
+</section>
+
 <section id="agent-selection">
 
+- Fallback path — only when the Workflow tool is unavailable (see `dispatch-mode`)
 - One agent per option for parallel deep evaluation
 - Agent names vary by environment; do not assume a specific agent exists
 - Inspect available subagents via the `Agent` tool's `subagent_type` parameter
@@ -101,6 +124,7 @@ User can add, remove, or reweight dimensions before dispatch.
 <section id="consolidated-matrix">
 
 - After all option-agents return, produce side-by-side matrix
+- If the workflow returns `stats.scored < stats.requested`, MUST name the options that failed and ask whether to re-run them before showing the matrix
 - Required output structure:
 
   ```
@@ -137,7 +161,7 @@ User can add, remove, or reweight dimensions before dispatch.
 
 - MUST gather option list AND dimension list before any dispatch
 - MUST confirm both with user before dispatch
-- MUST dispatch in parallel (single message, multiple tool uses), one agent per option
+- MUST dispatch scoring via the `compare-score` workflow when the Workflow tool is available; else dispatch in parallel (single message, multiple tool uses), one agent per option
 - MUST keep findings local in chat only
 - MUST NOT post to Slack, GitHub, Jira, or any external system unless user explicitly authorizes
 - MUST NOT pick a winner without showing the matrix

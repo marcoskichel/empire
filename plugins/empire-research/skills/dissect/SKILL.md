@@ -5,7 +5,7 @@ description: >
   resolve vague entities, verify each independently, separate confirmed facts
   from narrative interpretation. Use to fact-check complex claims, investigate
   narratives mixing fact with interpretation, or when a claim bundles multiple
-  assertions. For AI-generated output, use `/empire-research:verify` instead.
+  assertions.
   Trigger phrases: "investigate this claim", "fact-check this", "is this true",
   "decompose this narrative", "viral content check", "trace this claim",
   "/empire-research:dissect".
@@ -16,7 +16,7 @@ description: >
 
 **Complex claims combine verifiable facts with unverifiable interpretations.** Effective investigation decomposes claims into atomic components, verifies each independently, and clearly distinguishes confirmed facts from narrative framing.
 
-Difference from `/empire-research:verify`: `dissect` investigates external claims (social media, sources). `verify` checks AI-generated output for hallucinations.
+Scope: `dissect` investigates external claims (social media, sources, viral content) — multi-part assertions that bundle fact with framing.
 
 </section>
 

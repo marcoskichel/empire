@@ -23,7 +23,7 @@
     {
       "name": "empire-research",
       "source": "./plugins/empire-research",
-      "description": "Research collaboration: open-ended exploration (explore), closed comparison (compare), hallucination checking (verify), and claim investigation (dissect) plus a bundled research subagent."
+      "description": "Research collaboration: open-ended exploration (explore), closed comparison (compare), and claim investigation (dissect), with workflow-backed parallel agent dispatch. Bundles a research subagent."
     },
     {
       "name": "empire-product",
