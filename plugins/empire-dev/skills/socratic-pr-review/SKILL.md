@@ -9,6 +9,7 @@ description: >
   the user one by one, then posts ONE review (approve / request changes /
   comment) at once. Posts to GitHub only after explicit user validation of every
   comment and the final verdict.
+compatibility: Requires the gh CLI and network access; dispatches review subagents.
 allowed-tools: Bash Read Glob Grep Skill Agent WebSearch WebFetch
 ---
 

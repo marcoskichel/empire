@@ -7,6 +7,7 @@ description: >
   "/empire-product:pitch", "tell me about yourself", "what's a good way to introduce this",
   "explain this repo in one line", "describe this project", "intro paragraph", "tagline",
   "one-liner", "GitHub repo description", "package.json description", "what does this do".
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 # Elevator Pitch Generator

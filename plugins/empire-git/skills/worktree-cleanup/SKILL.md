@@ -7,6 +7,7 @@ description: >
   worktrees", "clean up old branches", "purge stale worktrees", "housekeeping".
   For finishing ONE specific worktree, use worktree-close instead. Also
   triggers for `/empire-git:worktree-cleanup [--dry-run] [--days N]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: haiku
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[--dry-run] [--days N]"

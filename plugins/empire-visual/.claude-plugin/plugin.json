@@ -1,6 +1,6 @@
 {
   "name": "empire-visual",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Visual-first communication: a 'visual-first' output style that leads every answer with a diagram, table, or tree, plus an on-demand visualize skill for terminal-native ASCII architecture, flowcharts, state machines, and comparison tables. Grounded in dual-coding and multimedia-learning research.",
   "dependencies": ["empire-rules"],
   "author": {

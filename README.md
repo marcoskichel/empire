@@ -35,15 +35,15 @@ Or hire individual departments:
 
 ## Plugins
 
-| Plugin                                                 | What it does                                                                                                                                            |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`empire`](plugins/empire-meta/README.md)              | Meta bundle. Installs `empire-git`, `empire-dev`, `empire-research`, and `empire-product` together.                                                     |
-| [`empire-git`](plugins/empire-git/README.md)           | Git workflow: parallel worktree lifecycle (`open`, `close`, `merge`, `list`, `cleanup`, `help`) and canonical `pr-description` templating.              |
-| [`empire-dev`](plugins/empire-dev/README.md)           | Code `team-review`, engineering diagnostics (`shape`, `weigh`, `slice`), plus 11 bundled dev subagents (generalist review, paradigms, domain experts).  |
-| [`empire-research`](plugins/empire-research/README.md) | Open-ended `explore`, closed `compare`, and claim-investigation `dissect` skills with workflow-backed parallel agent dispatch and consolidated reports. |
-| [`empire-product`](plugins/empire-product/README.md)   | Product comms and intelligence: `pitch`, `vet`, `recon`, `mint`, `distill`, `probe`. Three bundled subagents.                                           |
-| [`empire-visual`](plugins/empire-visual/README.md)     | Visual-first comms: a `visual-first` output style + on-demand `visualize` skill for terminal-native ASCII diagrams, flowcharts, state machines, tables. |
-| [`empire-rules`](plugins/empire-rules/README.md)       | Utility: `/empire-rules:sync-rules` reconciles per-plugin routing snippets into the project's `AGENTS.md`. Auto-installed as a dependency.              |
+| Plugin                                                 | What it does                                                                                                                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`empire`](plugins/empire-meta/README.md)              | Meta bundle. Installs `empire-git`, `empire-dev`, `empire-research`, and `empire-product` together.                                                                 |
+| [`empire-git`](plugins/empire-git/README.md)           | Git workflow: parallel worktree lifecycle (`open`, `close`, `merge`, `list`, `cleanup`, `help`), `pr-description` templating, and stacked-PR `pr-stack`/`pr-merge`. |
+| [`empire-dev`](plugins/empire-dev/README.md)           | Code `team-review`, engineering diagnostics (`shape`, `weigh`, `slice`), plus 11 bundled dev subagents (generalist review, paradigms, domain experts).              |
+| [`empire-research`](plugins/empire-research/README.md) | Open-ended `explore`, closed `compare`, and claim-investigation `dissect` skills with workflow-backed parallel agent dispatch and consolidated reports.             |
+| [`empire-product`](plugins/empire-product/README.md)   | Product comms and intelligence: `pitch`, `vet`, `recon`, `mint`, `distill`, `probe`. Three bundled subagents.                                                       |
+| [`empire-visual`](plugins/empire-visual/README.md)     | Visual-first comms: a `visual-first` output style + on-demand `visualize` skill for terminal-native ASCII diagrams, flowcharts, state machines, tables.             |
+| [`empire-rules`](plugins/empire-rules/README.md)       | Utility: `/empire-rules:sync-rules` reconciles per-plugin routing snippets into the project's `AGENTS.md`. Auto-installed as a dependency.                          |
 
 <!-- prettier-ignore-start -->
 > [!TIP]

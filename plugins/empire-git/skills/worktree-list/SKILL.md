@@ -8,6 +8,7 @@ description: >
   Reports state only, never deletes or modifies. For removal use worktree-close
   (single) or worktree-cleanup (batch). Also triggers for
   `/empire-git:worktree-list [--stale]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: haiku
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[--stale]"

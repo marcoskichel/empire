@@ -8,6 +8,7 @@ description: >
   exploration: shallow scan enumerates 3–5 candidate approaches, user picks
   subset to deep-dive, parallel research per approach, consolidated comparison
   with recommended direction. Findings stay local — never posted externally.
+compatibility: Requires network access (web search and fetch); dispatches research subagents.
 ---
 
 <section id="purpose-vs-compare">

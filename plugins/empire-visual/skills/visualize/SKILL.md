@@ -9,6 +9,7 @@ description: >
   me a diagram", "map this out", "flowchart", "architecture diagram", "sequence
   diagram", "state machine", "ascii diagram", "make this visual",
   "/empire-visual:visualize".
+compatibility: Designed for Claude Code (or similar agents).
 allowed-tools: Read, Grep, Glob
 ---
 

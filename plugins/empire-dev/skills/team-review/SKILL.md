@@ -7,6 +7,7 @@ description: >
   "get specialists to review", "run a team review", "do a specialist review".
   Spawns parallel specialist subagents to review diffs and consolidates findings.
   Never posts to GitHub.
+compatibility: Designed for Claude Code (or similar agents); dispatches review subagents.
 ---
 
 <section id="intent-gate">

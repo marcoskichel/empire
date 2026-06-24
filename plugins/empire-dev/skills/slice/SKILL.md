@@ -8,6 +8,7 @@ description: >
   phrases: "task too big", "can't estimate", "overwhelmed by scope", "where do
   I start", "break this down", "epic needs breakdown", "slice this up",
   "/empire-dev:slice".
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">

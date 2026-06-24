@@ -10,6 +10,7 @@ description: >
   for review", "regenerate PR body". MUST be invoked before any `gh pr create
   --body*` or `gh pr edit --body*` per empire-git rules. Outputs markdown for
   stdin.
+compatibility: Requires the gh CLI and git. Designed for Claude Code (or similar agents).
 allowed-tools: Bash Read Glob Grep
 ---
 
@@ -71,6 +72,8 @@ Depends on: <PR URL or branch name>
 ```
 
 Detect by running `git log --oneline <default-branch>..HEAD` and checking if the branch base differs from the repo default branch.
+
+For the visual stack overview (every PR in the chain, current one highlighted, merged ones struck-through), the `pr-stack` skill maintains a separate comment. Keep that out of the body — `Depends on:` is the only chain marker the body needs.
 
 ## Update mode
 

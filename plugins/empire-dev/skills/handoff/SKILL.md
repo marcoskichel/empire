@@ -12,6 +12,7 @@ description: >
   "implement, review, and open a PR", "build it, have the team review, then
   push a PR", "do the whole thing", "run this autonomously", "I'm stepping
   away — carry this to a PR", "ship this for me".
+compatibility: Requires the gh CLI and git; dispatches subagents. Designed for Claude Code.
 allowed-tools: Bash Read Edit Write Glob Grep Skill Agent TodoWrite
 argument-hint: "[task description | spec path]"
 ---

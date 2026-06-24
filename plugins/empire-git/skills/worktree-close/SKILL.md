@@ -8,6 +8,7 @@ description: >
   branch", "push and remove", "tear down this worktree". For batch cleanup of
   MULTIPLE stale worktrees, use worktree-cleanup instead. Also triggers for
   `/empire-git:worktree-close [branch] [--push] [--discard] [--force]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[branch | path] [--push] [--discard] [--force]"

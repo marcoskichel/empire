@@ -6,14 +6,14 @@ This file provides guidance for AI agents working with code in this repository.
 
 - Claude Code plugin marketplace. No build, no lint, no test harness.
 - Single marketplace (`.claude-plugin/marketplace.json`) exposes six plugins: `empire` (meta bundle), `empire-git`, `empire-dev`, `empire-research`, `empire-product`, `empire-visual`. Plus `empire-rules` (utility, auto-installed as a transitive dependency).
-- Plugin content = markdown SKILL files, dynamic-workflow `.js` scripts (in `empire-research`), and one bash bootstrap script (in `empire-git`).
-- Validation = install-and-invoke in Claude Code. No CI suite.
+- Plugin content = markdown SKILL files, dynamic-workflow `.js` scripts (in `empire-research`), bash scripts and a dependency-free unit-tested Node script (`pr-stack.mjs`) in `empire-git`.
+- Validation = `.github/workflows/validate.yml`: pre-commit, manifest + SKILL.md spec checks, and `node --test` for `pr-stack`; plus install-and-invoke in Claude Code.
 
 ## Layout
 
 - `.claude-plugin/marketplace.json` — marketplace manifest. Each `plugins[]` entry points to one of the `plugins/empire-*` dirs.
 - `plugins/empire-meta/.claude-plugin/plugin.json` — meta plugin (`name: "empire"`). Empty skills dir. Uses `dependencies` field to auto-install the sub-plugins.
-- `plugins/empire-git/` — git workflow skills (`worktree-*`, `pr-description`) + `scripts/worktree-setup.sh`.
+- `plugins/empire-git/` — git workflow skills (`worktree-*`, `pr-description`, stacked-PR `pr-stack`/`pr-merge`) + bash `scripts/` and the Node `scripts/pr-stack.mjs` (+ `pr-stack.test.mjs`).
 - `plugins/empire-dev/` — code `team-review` skill, pre-implementation engineering skills (`shape`, `weigh`, `slice`), plus 11 bundled dev subagents (code review, paradigms, domain experts).
 - `plugins/empire-research/` — `explore` (open-ended), `compare` (closed), and `dissect` (claim investigation) research skills + `workflows/*.js` orchestration scripts, with `research-analyst` as bundled fallback subagent.
 - `plugins/empire-product/` — product skills (`pitch`, `vet`, `recon`, `mint`, `distill`, `probe`), plus three bundled subagents (`project-idea-validator`, `competitive-analyst`, `market-researcher`).
@@ -53,7 +53,8 @@ This file provides guidance for AI agents working with code in this repository.
 - `allowed-tools` declaration:
   - Declare on skills that directly invoke `Bash`/`Read`/`Glob`/`Grep` (e.g. `worktree-*`, `sync-rules`, `pr-description`).
   - Do NOT declare on skills that purely delegate to subagents via `Agent` tool (e.g. `team-review`, `vet`, `recon`, `compare`, `explore`, `pitch`).
-- Scripts use `set -euo pipefail`, color-coded `info/warn/die/success` helpers (pattern in `worktree-setup.sh`).
+- Bash scripts use `set -euo pipefail`, color-coded `info/warn/die/success` helpers (pattern in `worktree-setup.sh`).
+- Node scripts (`pr-stack.mjs`): dependency-free ESM, shell out to `gh`, no `package.json`/build. Keep pure logic exported and covered by `pr-stack.test.mjs` (`node --test`); guard `main()` so importing for tests does not run it.
 
 ## Formatting and linting
 
@@ -65,5 +66,5 @@ This file provides guidance for AI agents working with code in this repository.
 
 ## What this repo is NOT
 
-- Not a Node/Python/Go project. No `package.json`, no `pyproject.toml`. Don't add a build system unless asked.
+- Not a Node/Python/Go project. No `package.json`, no `pyproject.toml`. `pr-stack.mjs` is dependency-free Node run via `node`/`node --test` with no build — keep it that way; don't add a build system or runtime deps unless asked.
 - Not a backend. Skills run inside Claude Code on the user's machine. Assume zero server-side state.

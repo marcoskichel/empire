@@ -1,6 +1,6 @@
 # empire-git
 
-Git workflow skills: parallel worktree lifecycle and PR description templating.
+Git workflow skills: parallel worktree lifecycle, PR description templating, and stacked-PR maintenance.
 
 Part of the [empire](../../README.md) marketplace.
 
@@ -190,6 +190,40 @@ To make it impossible for the agent to bypass, add this one-line rule to your pr
 ```
 
 **Source:** [`skills/pr-description/SKILL.md`](skills/pr-description/SKILL.md)
+
+### `pr-stack`
+
+Maintains a "PR stack" comment across a chain of stacked PRs. Builds the chain from the live GitHub PR graph (linking each PR's base branch to another open PR's head branch), unions it with the membership stored in any existing stack comment (so merged PRs whose head branch was deleted stay listed), then upserts one idempotent marker comment on every open PR in the chain. Each comment shows the whole chain as a single-column table of `[title](url)` links, base → tip, with the current PR bolded and suffixed `← this PR` and merged PRs struck-through with ✅. A lone PR against the default branch gets no comment (a stale one is removed). The bundled `pr-stack.mjs` (dependency-free Node, `gh`-only) does the graph-building and comment upsert; its pure logic is unit-tested via `node --test`.
+
+**Triggers:** "PR stack", "stacked PRs", "PR chain", "PR chain header", "stack comment", "update the PR stack", "refresh the stack", "mark merged PRs sliced through".
+
+**Usage:** `/empire-git:pr-stack [--pr <number>] [--repo <owner/repo>] [--dry-run]`
+
+```mermaid
+flowchart LR
+  graph[gh PR graph] --> chain[Build chain + union stored]
+  chain --> render[Render per-PR comment]
+  render --> upsert[Upsert via marker]
+```
+
+**Source:** [`skills/pr-stack/SKILL.md`](skills/pr-stack/SKILL.md), [`scripts/pr-stack.mjs`](scripts/pr-stack.mjs), [`scripts/pr-stack.test.mjs`](scripts/pr-stack.test.mjs)
+
+### `pr-merge`
+
+Gates then merges a single PR, then refreshes the stack. Verifies CI is green (investigates and attempts a fix when red), rebases and resolves conflicts when the branch is behind, triages unresolved review threads intelligently (resolve, fix, or ask — never blind-blocks), then retargets any stacked children onto the base branch before merging. This ordering matters: GitHub closes (does not retarget) dependent PRs when the head branch is deleted, so children are moved first, then the PR is merged and its branch deleted. Fast-forwards the local base checkout (e.g. updates `master`) when it's checked out in a worktree, then invokes `pr-stack` to mark the merged PR sliced-through and re-render the chain.
+
+**Triggers:** "merge this PR", "merge the PR", "land this", "ship this PR", "merge when green", "merge the stack bottom".
+
+**Usage:** `/empire-git:pr-merge [--pr <number>] [--squash|--merge|--rebase] [--admin]`
+
+```mermaid
+flowchart LR
+  gate[Gate CI + conflicts + threads] --> retarget[Retarget children to base]
+  retarget --> merge[Merge + delete branch]
+  merge --> stack[Refresh pr-stack]
+```
+
+**Source:** [`skills/pr-merge/SKILL.md`](skills/pr-merge/SKILL.md)
 
 ## Upstream attribution
 

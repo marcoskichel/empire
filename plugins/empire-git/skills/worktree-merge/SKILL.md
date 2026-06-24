@@ -10,6 +10,7 @@ description: >
   `worktree-close --push` instead. For batch teardown of stale worktrees, use
   worktree-cleanup. Also triggers for `/empire-git:worktree-merge [branch]
   --into <target> [--no-close] [--ff]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "<branch> --into <target> [--no-close] [--ff]"

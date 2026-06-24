@@ -8,6 +8,7 @@ description: >
   phrases: "architecture decision", "ADR", "which pattern should I use",
   "evaluate trade-offs", "technology choice", "design pattern selection",
   "weigh the options", "/empire-dev:weigh".
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">

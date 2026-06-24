@@ -9,6 +9,7 @@ description: >
   `/empire-product:recon`). User has a known option set; produces a
   side-by-side matrix on user-defined dimensions and recommends a winner.
   Findings stay local — never posted externally.
+compatibility: Requires network access (web search and fetch); dispatches research subagents.
 ---
 
 <section id="purpose-vs-explore">

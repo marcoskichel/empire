@@ -9,6 +9,7 @@ description: >
   "system design", "how should I structure this", "too much abstraction",
   "under-engineered", "where do I start building", "design this system",
   "walking skeleton", "/empire-dev:shape".
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">
