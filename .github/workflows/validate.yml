@@ -32,19 +32,40 @@ jobs:
             fi
           done
           exit $fail
-      - name: Verify SKILL.md frontmatter name matches dir
+      - name: Validate SKILL.md against Agent Skills spec
         run: |
-          set -euo pipefail
-          fail=0
-          for skill in plugins/*/skills/*/SKILL.md; do
-            dir=$(basename "$(dirname "$skill")")
-            name=$(awk '/^name:/ {print $2; exit}' "$skill")
-            if [ "$dir" != "$name" ]; then
-              echo "::error file=$skill::frontmatter name '$name' does not match dir '$dir'"
-              fail=1
-            fi
-          done
-          exit $fail
+          python3 - <<'PY'
+          import re, glob, os, sys
+          fail = 0
+          NAME = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
+          for f in sorted(glob.glob('plugins/*/skills/*/SKILL.md')):
+              txt = open(f, encoding='utf-8').read()
+              m = re.match(r'^---\n(.*?)\n---\n', txt, re.S)
+              if not m:
+                  print(f"::error file={f}::missing YAML frontmatter"); fail = 1; continue
+              fm = m.group(1)
+              dirn = os.path.basename(os.path.dirname(f))
+              nm = re.search(r'^name:\s*(.+)$', fm, re.M)
+              name = nm.group(1).strip() if nm else ''
+              if name != dirn:
+                  print(f"::error file={f}::name '{name}' must match dir '{dirn}'"); fail = 1
+              if not name or len(name) > 64 or not NAME.match(name):
+                  print(f"::error file={f}::name '{name}' violates spec (1-64, lowercase a-z0-9, single hyphens)"); fail = 1
+              dm = re.search(r'^description:\s*[>|]?\s*\n((?:[ \t]+.*\n?)+)', fm, re.M)
+              if dm:
+                  desc = ' '.join(l.strip() for l in dm.group(1).splitlines())
+              else:
+                  d2 = re.search(r'^description:\s*(.+)$', fm, re.M)
+                  desc = d2.group(1).strip() if d2 else ''
+              if not desc:
+                  print(f"::error file={f}::description is empty"); fail = 1
+              if len(desc) > 1024:
+                  print(f"::error file={f}::description {len(desc)} chars exceeds 1024"); fail = 1
+              cm = re.search(r'^compatibility:\s*(.+)$', fm, re.M)
+              if cm and len(cm.group(1).strip()) > 500:
+                  print(f"::error file={f}::compatibility exceeds 500 chars"); fail = 1
+          sys.exit(fail)
+          PY
       - name: Verify each plugin has a manifest
         run: |
           set -euo pipefail
@@ -56,3 +77,14 @@ jobs:
             fi
           done
           exit $fail
+
+  unit-tests:
+    name: unit tests (node)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run Node unit tests
+        run: git ls-files '*.test.mjs' | xargs -r node --test
