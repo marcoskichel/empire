@@ -72,6 +72,8 @@ Depends on: <PR URL or branch name>
 
 Detect by running `git log --oneline <default-branch>..HEAD` and checking if the branch base differs from the repo default branch.
 
+For the visual stack overview (every PR in the chain, current one highlighted, merged ones struck-through), the `pr-stack` skill maintains a separate comment. Keep that out of the body — `Depends on:` is the only chain marker the body needs.
+
 ## Update mode
 
 If an existing body is provided:
