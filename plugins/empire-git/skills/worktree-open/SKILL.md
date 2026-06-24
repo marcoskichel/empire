@@ -7,6 +7,7 @@ description: >
   for an agent", "side branch without switching", or mentions worktrees,
   parallel branches, or stacked work. Also triggers for
   `/empire-git:worktree-open [branch | task description] [--base <branch>]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[branch | task description] [--base <branch>]"

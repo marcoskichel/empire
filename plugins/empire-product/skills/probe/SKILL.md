@@ -9,6 +9,7 @@ description: >
   "reasoning feels circular", "probe my logic", "/empire-product:probe".
   Two modes: self-monitoring (audit own process) and user coaching (diagnose user's
   thinking with questions, not declarations).
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">

@@ -7,6 +7,7 @@ description: >
   routing rules", "install empire skill rules", "refresh empire CLAUDE.md",
   "rewrite empire rules", or after installing/updating an empire-* plugin to
   write its routing block.
+compatibility: Requires file write access to the rules file. Designed for Claude Code (or similar agents).
 argument-hint: "[plugin] [--scope user|project|both]"
 allowed-tools: Bash, Read, Write
 ---

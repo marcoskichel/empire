@@ -10,6 +10,7 @@ description: >
   "decompose this narrative", "viral content check", "trace this claim",
   "/empire-research:dissect".
   Findings stay local — never post to GitHub.
+compatibility: Requires network access (web search and fetch).
 ---
 
 <section id="core">

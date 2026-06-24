@@ -9,6 +9,7 @@ description: >
   "product naming", "names don't match", "forgettable name", "wrong associations",
   "mint a name", "/empire-product:mint".
   Findings stay local — never post to GitHub.
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">

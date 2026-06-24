@@ -8,6 +8,7 @@ description: >
   "is this the right problem", "define scope", "what does the user need",
   "distill requirements", "/empire-product:distill".
   Findings stay local — never post to GitHub.
+compatibility: Designed for Claude Code (or similar agents).
 ---
 
 <section id="core">

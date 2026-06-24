@@ -8,6 +8,7 @@ description: >
   product idea: web research for competitors and demand, fatal-flaw hypothesis,
   anti-sycophancy mode, structured go/no-go output with pivots.
   Findings stay local — never posted externally.
+compatibility: Requires network access (web research); dispatches research subagents.
 ---
 
 <section id="anti-sycophancy">

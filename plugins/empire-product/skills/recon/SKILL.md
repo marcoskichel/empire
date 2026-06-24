@@ -9,6 +9,7 @@ description: >
   with confidence-tagged data and a positioning angle. Different from
   `/empire-research:compare`, which evaluates tools, libraries, vendors, or architectural
   choices — NOT competitors. Findings stay local — never posted externally.
+compatibility: Requires network access (web research); dispatches research subagents.
 ---
 
 <section id="purpose">

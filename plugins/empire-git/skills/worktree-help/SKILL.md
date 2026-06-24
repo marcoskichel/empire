@@ -7,6 +7,7 @@ description: >
   copied", "what about port collisions", "how do worktrees affect main repo",
   "worktree workflow", "show me the worktree FAQ", or any question about the
   setup. Also triggers for `/empire-git:worktree-help [question]`.
+compatibility: Requires git. Designed for Claude Code (or similar agents).
 model: haiku
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[question]"
