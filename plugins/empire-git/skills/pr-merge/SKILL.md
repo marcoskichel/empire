@@ -13,6 +13,7 @@ description: >
   is checked out. After merging a chained PR, invokes `pr-stack` to mark it
   sliced-through and re-render the stack. MUST be the path for merging stacked
   PRs so the chain stays consistent.
+compatibility: Requires the gh CLI, git, and network access to GitHub.
 model: sonnet
 allowed-tools: Bash Read Glob Grep
 argument-hint: "[--pr <number>] [--squash|--merge|--rebase] [--admin]"
@@ -20,7 +21,7 @@ argument-hint: "[--pr <number>] [--squash|--merge|--rebase] [--admin]"
 
 # PR Merge
 
-Merge one PR only after it is genuinely ready: CI green, no conflicts, review threads handled. Then delete the head branch so GitHub retargets any stacked children, and refresh the stack comment.
+Merge one PR only after it is genuinely ready: CI green, no conflicts, review threads handled. Retarget any stacked children onto the base, then merge and delete the head branch (GitHub closes dependents otherwise), then refresh the stack comment.
 
 **User input:** $ARGUMENTS
 
@@ -167,7 +168,7 @@ gh pr list --state open --json number,baseRefName,headRefName
 Then refresh the stack so the merged PR shows struck-through and bases are current. Prefer invoking the `pr-stack` skill, anchored on a remaining open child. The script ships in this same plugin if you need it directly:
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/pr-stack.sh" --pr <remaining-open-pr>
+node "${CLAUDE_PLUGIN_ROOT}/scripts/pr-stack.mjs" --pr <remaining-open-pr>
 ```
 
 ## Step 9 — Report

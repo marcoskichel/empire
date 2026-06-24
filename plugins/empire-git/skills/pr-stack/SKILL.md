@@ -11,6 +11,7 @@ description: >
   removes the comment for a lone PR against the default branch. MUST run after
   merging or rebasing a PR in a chain to keep the stack current. Distinct from
   `pr-description`, which renders the PR body.
+compatibility: Requires the gh CLI, Node.js, and network access to GitHub.
 model: sonnet
 allowed-tools: Bash Read
 argument-hint: "[--pr <number>] [--repo <owner/repo>] [--dry-run]"
@@ -42,7 +43,7 @@ The script anchors on one PR and discovers the rest of the chain from it.
 ## Step 2 — Run the script
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/pr-stack.sh" [--pr <number>] [--repo <owner/repo>] [--dry-run]
+node "${CLAUDE_PLUGIN_ROOT}/scripts/pr-stack.mjs" [--pr <number>] [--repo <owner/repo>] [--dry-run]
 ```
 
 Use `--dry-run` first when you want to preview the rendered comment and planned actions without posting anything.

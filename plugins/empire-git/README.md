@@ -193,7 +193,7 @@ To make it impossible for the agent to bypass, add this one-line rule to your pr
 
 ### `pr-stack`
 
-Maintains a "PR stack" comment across a chain of stacked PRs. Builds the chain from the live GitHub PR graph (linking each PR's base branch to another open PR's head branch), unions it with the membership stored in any existing stack comment (so merged PRs whose head branch was deleted stay listed), then upserts one idempotent marker comment on every open PR in the chain. Each comment shows the whole chain as a single-column table of `[title](url)` links, base → tip, with the current PR bolded and suffixed `← this PR` and merged PRs struck-through with ✅. A lone PR against the default branch gets no comment (a stale one is removed). The bundled `pr-stack.sh` does the graph-building and comment upsert.
+Maintains a "PR stack" comment across a chain of stacked PRs. Builds the chain from the live GitHub PR graph (linking each PR's base branch to another open PR's head branch), unions it with the membership stored in any existing stack comment (so merged PRs whose head branch was deleted stay listed), then upserts one idempotent marker comment on every open PR in the chain. Each comment shows the whole chain as a single-column table of `[title](url)` links, base → tip, with the current PR bolded and suffixed `← this PR` and merged PRs struck-through with ✅. A lone PR against the default branch gets no comment (a stale one is removed). The bundled `pr-stack.mjs` (dependency-free Node, `gh`-only) does the graph-building and comment upsert; its pure logic is unit-tested via `node --test`.
 
 **Triggers:** "PR stack", "stacked PRs", "PR chain", "PR chain header", "stack comment", "update the PR stack", "refresh the stack", "mark merged PRs sliced through".
 
@@ -206,7 +206,7 @@ flowchart LR
   render --> upsert[Upsert via marker]
 ```
 
-**Source:** [`skills/pr-stack/SKILL.md`](skills/pr-stack/SKILL.md), [`scripts/pr-stack.sh`](scripts/pr-stack.sh)
+**Source:** [`skills/pr-stack/SKILL.md`](skills/pr-stack/SKILL.md), [`scripts/pr-stack.mjs`](scripts/pr-stack.mjs), [`scripts/pr-stack.test.mjs`](scripts/pr-stack.test.mjs)
 
 ### `pr-merge`
 
