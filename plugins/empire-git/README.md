@@ -240,6 +240,24 @@ flowchart LR
 
 **Source:** [`skills/pr-merge/SKILL.md`](skills/pr-merge/SKILL.md)
 
+### `pr-merge-stack`
+
+Merges a stack of dependent PRs bottom-up. Infers the stack from conversation (asks when it can't), offers admin merge once up front (skips review requirements — CI stays a hard gate), then loops: wait for green CI, squash-merge, pull the base, `rebase --onto` the next PR (never plain-rebase after a squash merge), force-with-lease push, repeat until the stack is empty.
+
+**Triggers:** "merge the stack", "merge pr stack", "land the stack", "merge all these PRs", "merge the chain", "ship the whole stack".
+
+**Usage:** `/empire-git:pr-merge-stack [pr numbers or branches, bottom to top] [--admin]`
+
+```mermaid
+flowchart LR
+  stack[Infer stack] --> admin[Offer admin merge]
+  admin --> loop[CI gate + merge bottom PR]
+  loop --> rebase[Pull base + rebase next]
+  rebase --> loop
+```
+
+**Source:** [`skills/pr-merge-stack/SKILL.md`](skills/pr-merge-stack/SKILL.md)
+
 ## Upstream attribution
 
 Source and license: [`skills/NOTICE.md`](skills/NOTICE.md).
