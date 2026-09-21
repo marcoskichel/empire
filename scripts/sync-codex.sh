@@ -65,7 +65,7 @@ MIRROR_BUNDLES=(
   "empire-product::pitch vet recon mint distill probe"
   "empire-research::explore compare dissect"
   "empire-visual::visualize"
-  "empire-git::worktree-open worktree-close worktree-list worktree-cleanup worktree-merge worktree-help pr-description pr-comment-reply pr-merge pr-review-post"
+  "empire-git::worktree-open worktree-close worktree-list worktree-cleanup worktree-merge worktree-help pr-description pr-comment-reply pr-merge pr-review-post pr-merge-stack"
 )
 
 # Script bundles: "SRC_SCRIPT::DST_SKILL_SCRIPTS_DIR". Copied so skills.sh ships

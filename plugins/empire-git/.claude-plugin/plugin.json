@@ -1,6 +1,6 @@
 {
   "name": "empire-git",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Git workflow skills for solo founders: worktree lifecycle, PR description templating, and gated PR merging.",
   "dependencies": ["empire-rules"],
   "author": {
