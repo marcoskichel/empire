@@ -258,6 +258,23 @@ flowchart LR
 
 **Source:** [`skills/pr-merge-stack/SKILL.md`](skills/pr-merge-stack/SKILL.md)
 
+### `activity-report`
+
+Concise report of the user's GitHub work over a period, grouped by area or feature instead of PR by PR. A bundled script collects merged and open PRs via `gh search prs`; the agent clusters them semantically (seven log-aggregation PRs become one "Logs aggregation" bullet) and writes outcome-focused bullets ordered by impact, with one-offs rolled into a single Maintenance line.
+
+**Triggers:** "activity report", "weekly report", "what did I do this week", "what did I ship", "work summary", "summarize my week", "status update for my manager".
+
+**Usage:** `/empire-git:activity-report [start-date] [end-date]`
+
+```mermaid
+flowchart LR
+  dates[Resolve period] --> collect[gh search prs]
+  collect --> cluster[Cluster by area]
+  cluster --> report[One bullet per area]
+```
+
+**Source:** [`skills/activity-report/SKILL.md`](skills/activity-report/SKILL.md)
+
 ## Upstream attribution
 
 Source and license: [`skills/NOTICE.md`](skills/NOTICE.md).
