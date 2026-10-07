@@ -51,20 +51,21 @@ The report is exactly this shape:
 
 ## Shipped
 
-- **<Area or feature>** — <1-2 sentences: what changed and why it matters>
+- **<Area or feature>** — <1-2 sentences: what changed and why it matters> ([#12](url), [#15](url))
 - **<Area or feature>** — ...
-- **Maintenance** — <one sentence rolling up the one-offs>
+- **Maintenance** — <one sentence rolling up the one-offs> ([#9](url))
 
 ## In progress
 
-- **<Area or feature>** — <one sentence on current state>
+- **<Area or feature>** — <one sentence on current state> ([#21](url))
 ```
 
 Rules for the body:
 
 - Order areas by impact, highest first. Maintenance is always last in Shipped.
 - Each bullet states the outcome, not the activity: "Gated Grafana behind Cloudflare Access" beats "Worked on access changes".
-- No PR links, counts, or repo names in bullets unless the user asks for them.
+- End each bullet with links to its PRs as `[#<number>](<url>)`, comma-separated in parentheses.
+- No PR counts or repo names in bullets unless the user asks for them.
 - Omit the "In progress" section when there are no open PRs in range.
 - Target: the whole report fits on one screen.
 

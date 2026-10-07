@@ -260,7 +260,7 @@ flowchart LR
 
 ### `activity-report`
 
-Concise report of a user's GitHub work (default: you) over a period, grouped by area or feature instead of PR by PR. A bundled script collects merged and open PRs via `gh search prs`; the agent clusters them semantically (seven log-aggregation PRs become one "Logs aggregation" bullet) and writes outcome-focused bullets ordered by impact, with one-offs rolled into a single Maintenance line.
+Concise report of a user's GitHub work (default: you) over a period, grouped by area or feature instead of PR by PR. A bundled script collects merged and open PRs via `gh search prs`; the agent clusters them semantically (seven log-aggregation PRs become one "Logs aggregation" bullet) and writes outcome-focused bullets ordered by impact, each linking its PRs, with one-offs rolled into a single Maintenance line.
 
 **Triggers:** "activity report", "weekly report", "what did I do this week", "what did I ship", "work summary", "summarize my week", "status update for my manager", "what did <user> ship".
 
