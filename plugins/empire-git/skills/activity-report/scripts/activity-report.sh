@@ -3,10 +3,10 @@
 # Part of the empire-git plugin (Claude Code and OpenAI Codex).
 #
 # Usage:
-#   activity-report.sh [START_DATE] [END_DATE]   # dates as YYYY-MM-DD, default: last 7 days
+#   activity-report.sh [START_DATE] [END_DATE] [AUTHOR]   # dates as YYYY-MM-DD, default: last 7 days; AUTHOR default: @me
 #
-# Prints markdown-friendly raw data (merged PRs + open PRs authored by the
-# current gh user) for an agent to cluster into an area/feature report.
+# Prints markdown-friendly raw data (merged PRs + open PRs authored by
+# AUTHOR, a GitHub login or @me) for an agent to cluster into an area/feature report.
 
 set -euo pipefail
 
@@ -24,6 +24,7 @@ DEFAULT_END="$(date +%Y-%m-%d)"
 
 START_DATE="${1:-$DEFAULT_START}"
 END_DATE="${2:-$DEFAULT_END}"
+AUTHOR="${3:-@me}"
 
 DATE_REGEX='^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
 [[ "$START_DATE" =~ $DATE_REGEX ]] || die "START_DATE must be YYYY-MM-DD (got '$START_DATE')"
@@ -32,12 +33,12 @@ DATE_REGEX='^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
 command -v gh >/dev/null 2>&1 || die "gh CLI not installed (https://cli.github.com/)"
 gh auth status >/dev/null 2>&1 || die "not authenticated — run: gh auth login"
 
-echo "# GitHub PR activity: $START_DATE to $END_DATE"
+echo "# GitHub PR activity for $AUTHOR: $START_DATE to $END_DATE"
 echo
 
 echo "## Merged PRs"
 gh search prs \
-  --author=@me \
+  --author="$AUTHOR" \
   --merged-at="$START_DATE..$END_DATE" \
   --limit 100 \
   --json title,repository,url \
@@ -46,7 +47,7 @@ gh search prs \
 echo
 echo "## Open PRs (created in range)"
 gh search prs \
-  --author=@me \
+  --author="$AUTHOR" \
   --state=open \
   --created="$START_DATE..$END_DATE" \
   --limit 100 \

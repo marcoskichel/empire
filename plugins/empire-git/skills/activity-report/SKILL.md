@@ -4,11 +4,12 @@ description: >
   Generate a concise activity report of the user's GitHub work over a period,
   grouped by area or feature instead of PR by PR. Use when user says "activity
   report", "weekly report", "what did I do this week", "what did I ship",
-  "work summary", "summarize my week", "status update for my manager", or
-  `/empire-git:activity-report [start-date] [end-date]`.
+  "work summary", "summarize my week", "status update for my manager",
+  "what did <user> ship", or
+  `/empire-git:activity-report [start-date] [end-date] [author]`.
 compatibility: Requires gh (authenticated) and jq. Runs in Claude Code and OpenAI Codex; the bundled collection script ships with the skill.
 allowed-tools: Bash Read
-argument-hint: "[start-date] [end-date]"
+argument-hint: "[start-date] [end-date] [author]"
 ---
 
 # Activity Report
@@ -17,19 +18,21 @@ Produce a short, high-signal report of what the user shipped in a period. The re
 
 **User input:** $ARGUMENTS
 
-## Step 1 — Resolve the period
+## Step 1 — Resolve the period and author
 
 Dates are `YYYY-MM-DD`. Defaults when omitted: last 7 days. Interpret natural language ("this week", "last month", "since Monday") into concrete dates before running the script.
+
+Author is a GitHub login (strip a leading `@`). Default: `@me`, the current `gh` user.
 
 ## Step 2 — Collect raw PR data
 
 The collection script ships with this skill. On Claude Code it is at `${CLAUDE_PLUGIN_ROOT}/scripts/activity-report.sh`; on other agents (e.g. Codex) it is `scripts/activity-report.sh` inside this skill's directory.
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT}/scripts/activity-report.sh" 2026-01-01 2026-01-07
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/activity-report.sh" 2026-01-01 2026-01-07 octocat
 ```
 
-It prints merged PRs and open PRs authored by the current `gh` user, with titles, repos, and URLs. It reads nothing but the date args and calls only `gh search prs`.
+It prints merged PRs and open PRs authored by the given author (default `@me`), with titles, repos, and URLs. It reads nothing but its args and calls only `gh search prs`.
 
 ## Step 3 — Cluster into areas
 
